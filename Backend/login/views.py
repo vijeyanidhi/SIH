@@ -19,7 +19,7 @@ def login(request):
             print("key,value", x, ":", y)
         ident = str(request.POST.get("ident"))
         password = str(request.POST.get("password"))
-        if(LoginData.objects.get(ident=ident).password = password):
+        if(LoginData.objects.get(ident=ident).password == password):
             response_json['login'] = True
             response_json['loginMessage'] = 'Successful'            
         else:
