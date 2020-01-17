@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from login.models import *
 
-import jwt
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
