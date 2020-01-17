@@ -41,7 +41,6 @@ class CheckerData(models.Model):
     state = models.CharField(max_length=240, blank=False, null=True)
     country = models.CharField(max_length=240, blank=False, null=True)
     totalCleared = models.IntegerField(default=0)
-    total
+    failure = models.IntegerField(default=0)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
-

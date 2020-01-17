@@ -5,8 +5,6 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
-
-
 class CustomerData(admin.ModelAdmin):
     list_display = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","created"]
     search_fields = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","modified","created"]
@@ -18,6 +16,12 @@ class DoctorDataAdmin(admin.ModelAdmin):
     search_fields = ["ident","houseNumber","streetName","area","city","state","country","medicalLicenseNumber","hospitalName","speciality","modified","created"]
 
 admin.site.register(DoctorData, DoctorDataAdmin)
+
+class CheckerDataAdmin(admin.ModelAdmin):
+    list_display = ["ident","houseNumber","streetName","area","city","state","country","totalCleared","failure","modified","created"]
+    search_fields = ["ident","houseNumber","streetName","area","city","state","country","totalCleared","failure","modified","created"]
+
+admin.site.register(CheckerData, CheckerDataAdmin)
 
 
 
