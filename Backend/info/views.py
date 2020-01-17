@@ -113,3 +113,48 @@ def update(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+@csrf_exempt
+def info(request):
+    response_json = {}
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        ident = str(request.POST.get("ident"))
+        identInstance = LoginData.objects.get(ident=ident)
+        accessLevel = identInstance.accessLevel
+
+        ResetDataInstance = ResetData.objects.get(ident=identInstance)
+
+        response_json['name'] = ResetDataInstance.name
+        response_json['emailID'] = ResetDataInstance.emailID
+        response_json['mobile'] = ResetDataInstance.mobileResetDataInstance
+
+        if accessLevel == "customer":
+            row = CustomerData.objects.get(ident = identInstance)
+            response_json['isCustomer'] = row.isCustomer
+        elif accessLevel == "doctor":
+            row = DoctorData.objects.get(ident = identInstance)
+            response_json['medicalLicenseNumber'] = row.medicalLicenseNumber
+            response_json['hospitalName'] = row.hospitalName
+            response_json['speciality'] = row.speciality
+        elif accessLevel == "checker":
+            row = CheckerData.objects.get(ident = identInstance)
+            response_json['totalCleared'] = row.totalCleared
+            response_json['failure'] = row.failure
+ 
+        response_json['houseNumber'] = row.houseNumber
+        response_json['streetName'] = row.streetName
+        response_json['area'] = row.area
+        response_json['city'] = row.city
+        response_json['state'] = row.state
+        response_json['country'] = row.country
+
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)
