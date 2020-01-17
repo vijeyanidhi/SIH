@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
-class CustomerData(admin.ModelAdmin):
+class CustomerDataAdmin(admin.ModelAdmin):
     list_display = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","created"]
     search_fields = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","modified","created"]
 
