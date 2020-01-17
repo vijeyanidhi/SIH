@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class LoginData(models.Model):
-    ident = models.CharField(max_length=240, blank=False, null=False)
+    ident = models.AutoField(primary_key=True)
     password = models.CharField(max_length=240, blank=False, null=False)
     accessLevel = models.CharField(max_length=240, blank=False, null=False)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)

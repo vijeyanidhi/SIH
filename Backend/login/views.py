@@ -44,7 +44,7 @@ def reset_password(request):
         if LoginData.objects.filter(ident=ident).exists():
 #            generate new password
             row = LoginData.objects.get(ident=ident)
-#            setattr(row,password,genpassword)
+#            setattr(row,'password',genpassword)
 #            send mail
             response_json['reset'] = True
             response_json['resetMessage'] = 'Reset Successful'

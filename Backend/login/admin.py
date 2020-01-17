@@ -7,7 +7,7 @@ from .models import *
 # Register your models here.
 
 class LoginDataAdmin(admin.ModelAdmin):
-    list_display = ["ident","password","modified","accessLevel","created"]
+    list_display = ["ident","password","accessLevel","modified","created"]
     search_fields = ["ident","password","accessLevel","modified","created"]
 
 admin.site.register(LoginData, LoginDataAdmin)

@@ -6,7 +6,7 @@ from .models import *
 
 # Register your models here.
 class CustomerDataAdmin(admin.ModelAdmin):
-    list_display = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","created"]
+    list_display = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","modified","created"]
     search_fields = ["ident","houseNumber","streetName","area","city","state","country","isCustomer","modified","created"]
 
 admin.site.register(CustomerData, CustomerDataAdmin)
