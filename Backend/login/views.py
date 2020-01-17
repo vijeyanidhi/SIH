@@ -84,3 +84,46 @@ def forgot_Ident(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+
+@csrf_exempt
+def verify1(request):
+    response_json = {}
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        emailID = str(request.POST.get("emailID"))
+# gen otp
+# send otp
+# load stop time
+        OTPData.objects.create(emailID=emailID,OTP=OTP,stop=stop)
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)
+
+@csrf_exempt
+def verify2(request):
+    response_json = {}
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        emailID = str(request.POST.get("emailID"))
+        OTP = int(request.POST.get("OTP"))
+            
+        OTPDataInstance = OTPData.objects.get(emailID=emailID)
+
+        if(OTPDataInstance.OTP == OTP and ): # timenow less than stop time ):
+            setattr(OTPDataInstance,'flag',True)
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)

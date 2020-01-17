@@ -28,6 +28,10 @@ def signup(request):
         state = str(request.POST.get("state"))
         country = str(request.POST.get("country"))
 
+        OTPDataInstance = OTPData.objects.get(emailID=emailID)
+
+        if(not OTPDataInstance.flag):
+            print("Not verified") # mark1
         loginrow = LoginData.objects.create(password = password,accessLevel = accessLevel)
         loginrow.save()
 
@@ -124,6 +128,8 @@ def info(request):
         identInstance = LoginData.objects.get(ident=ident)
         accessLevel = identInstance.accessLevel
 
+        response_json['accessLevel'] = accessLevel
+
         ResetDataInstance = ResetData.objects.get(ident=identInstance)
 
         response_json['name'] = ResetDataInstance.name
@@ -140,8 +146,8 @@ def info(request):
             response_json['speciality'] = row.speciality
         elif accessLevel == "checker":
             row = CheckerData.objects.get(ident = identInstance)
-            response_json['totalCleared'] = row.totalCleared
-            response_json['failure'] = row.failure
+            response_json['totalCleared'] = row.totalCleared  # display only no edit
+            response_json['failure'] = row.failure            # display only no edit
  
         response_json['houseNumber'] = row.houseNumber
         response_json['streetName'] = row.streetName
