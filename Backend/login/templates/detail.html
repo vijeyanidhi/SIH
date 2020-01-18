@@ -21,6 +21,14 @@
         body{
             background-color: #6232a8;
         }
+		.row {
+			margin: 0;
+			padding: 0;
+		}
+		.col {
+			margin: 0;
+			padding: 0;
+		}
     </style>
 </head>
 <body>
@@ -53,6 +61,78 @@
                                         },
                                         success: function(response) {
                                             console.log(response);
+											Object.keys(response.basic).forEach(function(key) {
+												var rowNode = document.createElement('div');
+												rowNode.setAttribute('class', 'row');
+												var colKeyNode = document.createElement('div');
+												colKeyNode.setAttribute('class', 'col-xs-6');
+												var colKeyTextNode = document.createTextNode(key);
+												colKeyNode.appendChild(colKeyTextNode);
+												var colValueNode = document.createElement('div');
+												colValueNode.setAttribute('class', 'col-xs-6');
+												var colValueTextNode = document.createTextNode(response.basic[key]);
+												colValueNode.appendChild(colValueTextNode);
+												rowNode.appendChild(colKeyNode);
+												rowNode.appendChild(colValueNode);
+												document.getElementById('reportData').appendChild(rowNode);
+											});
+											Object.keys(response.report_value).forEach(function(key) {
+												var rowNode = document.createElement('div');
+												rowNode.setAttribute('class', 'row');
+												var colKeyNode = document.createElement('div');
+												colKeyNode.setAttribute('class', 'col-xs-6');
+												var colKeyTextNode = document.createTextNode(key);
+												colKeyNode.appendChild(colKeyTextNode);
+												var colValueNode = document.createElement('div');
+												colValueNode.setAttribute('class', 'col-xs-6');
+												var colValueTextNode = document.createTextNode(JSON.stringify(response.report_value[key]));
+												colValueNode.appendChild(colValueTextNode);
+												rowNode.appendChild(colKeyNode);
+												rowNode.appendChild(colValueNode);
+												document.getElementById('reportData').appendChild(rowNode);
+											});
+											Object.keys(response.list).forEach(function(key) {
+												var rowNode = document.createElement('div');
+												rowNode.setAttribute('class', 'row');
+												var colKeyNode = document.createElement('div');
+												colKeyNode.setAttribute('class', 'col-xs-6');
+												var colKeyTextNode = document.createTextNode(key);
+												colKeyNode.appendChild(colKeyTextNode);
+												var colValueNode = document.createElement('div');
+												colValueNode.setAttribute('class', 'col-xs-6');
+												var colValueTextNode = document.createTextNode(response.list[key].join(', '));
+												colValueNode.appendChild(colValueTextNode);
+												rowNode.appendChild(colKeyNode);
+												rowNode.appendChild(colValueNode);
+												document.getElementById('reportData').appendChild(rowNode);
+											});
+											var rowNode = document.createElement('div');
+											rowNode.setAttribute('class', 'row');
+											var colKeyNode = document.createElement('div');
+											colKeyNode.setAttribute('class', 'col-xs-6');
+											var colKeyTextNode = document.createTextNode('comment');
+											colKeyNode.appendChild(colKeyTextNode);
+											var colValueNode = document.createElement('div');
+											colValueNode.setAttribute('class', 'col-xs-6');
+											var colValueTextNode = document.createTextNode(response.comment);
+											colValueNode.appendChild(colValueTextNode);
+											rowNode.appendChild(colKeyNode);
+											rowNode.appendChild(colValueNode);
+											document.getElementById('reportData').appendChild(rowNode);
+											
+											rowNode = document.createElement('div');
+											rowNode.setAttribute('class', 'row');
+											colKeyNode = document.createElement('div');
+											colKeyNode.setAttribute('class', 'col-xs-6');
+											colKeyTextNode = document.createTextNode('summary');
+											colKeyNode.appendChild(colKeyTextNode);
+											colValueNode = document.createElement('div');
+											colValueNode.setAttribute('class', 'col-xs-6');
+											colValueTextNode = document.createTextNode(response.summary);
+											colValueNode.appendChild(colValueTextNode);
+											rowNode.appendChild(colKeyNode);
+											rowNode.appendChild(colValueNode);
+											document.getElementById('reportData').appendChild(rowNode);
                                         }
                                     })
                                 }
