@@ -129,3 +129,6 @@ EMAIL_HOST_USER = 'vijeyanidhi@gmail.com'
 EMAIL_HOST_PASSWORD = 'pikoicktpqehnopo'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
