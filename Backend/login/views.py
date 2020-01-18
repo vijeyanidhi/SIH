@@ -104,14 +104,17 @@ def forgot_Ident(request):
 def verify1(request):
     response_json = {}
     if request.method == 'POST':
+        print(request.POST)
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
         OTP = 124# 
         message = 'OTP for your account verification is ' + str(OTP)
+        print(emailID)
+        print(str(request.POST.get("message")))
         sendMail('OTP For email Verification',message,emailID)
         stop = datetime.now() + timedelta(minutes = 15)
-        stop = stop.strftime("%d/%m/%Y %H:%M:%S")
+        stop = str(stop.strftime("%d/%m/%Y %H:%M:%S"))
         OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
         response_json['success'] = True
         response_json['message'] = 'Successful'
@@ -139,13 +142,16 @@ def verify2(request):
         emailID = str(request.POST.get("emailID"))
         OTP = int(request.POST.get("OTP"))
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
-        stop = datetime.strptime(OTPDataInstance.stop, '%d/%m/%Y %H:%M:%S')
-        if(OTPDataInstance.otp == OTP and diff(datetime.now,stop,15)):
+        stop = datetime.strptime(OTPDataInstance.stop, "%d/%m/%Y %H:%M:%S")
+        if(OTPDataInstance.otp == OTP and diff(datetime.now(),stop,15)):
             setattr(OTPDataInstance,'flag',True)
+            response_json['otpmsg'] = 'successful'
+        else:
+            response_json['otpmsg'] = 'not successful'
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
-        response_json['success'] = False
+        response_json['suc*cess'] = False
         response_json['message'] = "Not Post Method"
 
     print (str(response_json))
@@ -157,4 +163,4 @@ def renderSignIn(request):
 @csrf_exempt
 def sendmail(request):
     message = 'OTP for your account verification is '
-    sendMail('OTP For email Verification',message,"vijay")
+    sendMail('OTP For email Verification',message,"transfervijay@gmail.com")

@@ -16,7 +16,7 @@ admin.site.register(TermData, TermDataAdmin)
 
 class ReportAdmin(admin.ModelAdmin):
     list_display = ["reportID","customerIdent","doctorName","modified","created"]
-    search_fields = ["reportID","customerIdent","doctorName,"modified","created"]
+    search_fields = ["reportID","customerIdent","doctorName","modified","created"]
 
 admin.site.register(Report, ReportAdmin)
 

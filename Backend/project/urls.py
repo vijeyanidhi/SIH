@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^login1/', login),
     url(r'^login/',renderSignIn),
     url(r'^verify1/',verify1),
+    url(r'^verify2/',verify2),
     url(r'^mail/',sendmail)
 ]
