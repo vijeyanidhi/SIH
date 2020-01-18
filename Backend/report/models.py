@@ -38,3 +38,5 @@ class reportupload(models.Model):
     image_url = models.CharField(max_length=240, blank=False, null=True)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+class 

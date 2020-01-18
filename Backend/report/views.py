@@ -120,4 +120,7 @@ def upload(request):
     return JsonResponse(response_json)
 
 def process():
-    
+    im=Image.open(url)
+    im1 = im.crop((values))
+    im1.save()
+
