@@ -32,12 +32,14 @@
       
    <script>
        function getCustInfo() {
+                var email = sessionStorage.getItem("emailID");
+
                   $.ajax({
                       url: "http://localhost:8000/getrep/",
                       type: "POST",
                       data: {
-
-                            // ident: sessionStorage.getItem("ident")
+                        email: email
+                            // dent: sessionStorage.getItem("ident")
                       },
                       success: function(response){
                         var data = response.data_list;
@@ -49,7 +51,7 @@
                                         url: 'http://localhost:8000/getReportTotal/',
                                         type: 'POST',
                                         data: {
-                                            reportID: el.reportID
+                                            reportID: el.reportID,
                                         },
                                         success: function(response) {
                                             console.log(response);
