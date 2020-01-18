@@ -61,3 +61,21 @@ def process(fp,values):
     Comments_Report,Summary,list_problem,list_treatment,list_tests,dict_basic,dict_blood,dict_urine = process_img(fp)
     
     
+@csrf_exempt
+def sendReport(request):
+    response_json = {}
+    ret_list = []
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        for x in ReportString.objects.all().values("reportID").distinct():
+            ret_list.append(x)
+        response_json['data_list'] = ret_list
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)
