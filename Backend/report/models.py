@@ -18,7 +18,6 @@ class Report(models.Model):
     reportID = models.CharField(max_length=240, blank=False, null=True)
     customerIdent = models.ForeignKey(LoginData)
     doctorName = models.CharField(max_length=240, blank=False, null=True)
-    doctorIdent = models.ForeignKey(LoginData)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
