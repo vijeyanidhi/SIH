@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 
 from django.core.mail import send_mail
-
+from PIL import Image
 # Create your views here.
 
 @csrf_exempt
@@ -118,3 +118,6 @@ def upload(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+def process():
+    
