@@ -32,3 +32,9 @@ class ReportContent(models.Model):
     refValue = models.CharField(max_length=240, blank = False, null=True)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+class reportupload(models.Model):
+    ident = models.ForeignKey(LoginData)
+    image = models.ImageField(upload_to='images/')
+    modified = models.DateTimeField(auto_now=True, auto_now_add=False)
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
