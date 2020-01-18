@@ -15,6 +15,12 @@ from django.views.decorators.csrf import csrf_exempt
 from Mail import sendMail
 
 # Create your views here.
+def random_char(y):
+       return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
+#def random_int(y):
+#       return ''.join(string(random.randints(0,9) for x in range(y))
+
 
 @csrf_exempt
 def login(request):
@@ -38,10 +44,6 @@ def login(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
-
-
-def random_char(y):
-       return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
 @csrf_exempt
 def reset_password(request):
@@ -98,10 +100,6 @@ def forgot_Ident(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
-
-def random_int(y):
-       return ''.join(string(random.randints(0,9) for x in range(y))
-
 @csrf_exempt
 def verify1(request):
     response_json = {}
@@ -109,7 +107,7 @@ def verify1(request):
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
-        OTP = int(random_int(7))
+        OTP = 124# 
         message = 'OTP for your account verification is ' + str(OTP)
         sendMail('OTP For email Verification',message,emailID)
         stop = datetime.now() + timedelta(minutes = 15)
