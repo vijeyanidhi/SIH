@@ -245,7 +245,9 @@ def sendTotalReport(request):
             dl2[x.reportKey]=x.reportValue
 
         for x in ReportValues.objects.filter(reportID=reportInstance):
-
+            dl5.append(x.reporttype)
+            dl6.append(x.reportKey)
+            dl7.append(x.reportValue)
             if(x.reporttype == "blood report"):
                 blood[x.reportKey] = x.reportValue
             elif(x.reporttype == "urine report"):
@@ -254,21 +256,38 @@ def sendTotalReport(request):
                 liver[x.reportKey] = x.reportValue  
             elif(x.reporttype == "stool report"):
                 stool[x.reportKey] = x.reportValue  
-          
-        dl3['bloodReport']=blood
-        dl3['urineReport']=urine
-        dl3['liverReport']=liver
-        dl3['stoolReport']=stool
 
         response_json['comment'] = ReportString.objects.get(reportID=reportID).comments
         response_json['summary'] = ReportString.objects.get(reportID=reportID).summary
 
         response_json['list'] = dl1
 
-        response_json['basic'] = dl2
+        response_json['basickey'] = dl3
+        response_json['basicvalue'] = dl4
 
-        response_json['report_value'] = dl3
+        response_json['reptype'] = dl5
+        response_json['repkey'] = dl6
+        response_json['repvalue'] = dl7
 
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+    print (str(response_json))
+    return JsonResponse(response_json)
+
+@csrf_exempt
+def sendTotalReport(request):
+
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        reportID = str(request.POST.get("reportID"))
+        reportfault = str(request.POST.get("status"))
+        
+        if(reportfault == "True")
+   
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
