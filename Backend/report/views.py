@@ -46,6 +46,7 @@ def upload(request):
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
+        ident = str(request.POST.get("ident"))
         handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
         response_json['success'] = True
         response_json['message'] = 'Successful'
@@ -56,13 +57,39 @@ def upload(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
-def process(fp,values):
+def process(ident,fp,values):
     im = Image.open(fp)
     im1 = im.crop((values))
     im1.save()
-    Comments_Report,Summary,list_problem,list_treatment,list_tests,dict_basic,dict_blood,dict_urine = process_img(fp)
+    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
+    reportID = str(datetime.now().strftime("%d/%m/%Y-%H:%M"))
+    if(len(Comments_Report)==0):
+        Comments_Report="None"
+    if(len(Summary)==0):
+        Summary="None"
+    ReportString.objects.create(ident=LoginData.objects.get(ident=ident),reportID=reportID,comments=Comments_Report,summary=Summary)
+
+    ReportStringInstance = ReportString.objects.get(reportID=reportID)
     
-    
+    for x,y in dict_blood:
+        ReportValues.objects.create(reportID=ReportStringInstance,report_type="blood report",reportKey=x,reportValue=y)
+    for x,y in dict_urine:
+        ReportValues.objects.create(reportID=ReportStringInstance,report_type="urine report",reportKey=x,reportValue=y)
+    for x,y,z in dict_liver:
+        ReportValues.objects.create(reportID=ReportStringInstance,report_type="liver report",reportKey=x,reportValue=y)
+    for x,y in dict_urine:
+        ReportValues.objects.create(reportID=ReportStringInstance,report_type="stool report",reportKey=x,reportValue=y)
+
+    for x,y in dict_basic:
+        ReportBasic.objects.create(reportID=ReportStringInstance,reportKey=x,reportValue=y)
+
+    for x in list_problem:
+        ReportList.objects.create(reportID=ReportStringInstance,reportKey="problem",reportValue=x)
+    for x in list_treatment:
+        ReportList.objects.create(reportID=ReportStringInstance,reportKey="treatment",reportValue=x)
+    for x in list_test:
+        ReportList.objects.create(reportID=ReportStringInstance,reportKey="test",reportValue=x)
+
 @csrf_exempt
 def sendReportID(request):
     response_json = {}
@@ -139,6 +166,29 @@ def sendReportBasicvalues(request):
         reportID = str(request.POST.get("reportID"))
         reportInstance = ReportString.objects.filter(reportID=reportID)
         for x in ReportBasic.objects.filter(reportID=reportInstance):
+            dl1.append(x.key)
+            dl2.append(x.value)
+        response_json['key'] = dl1
+        response_json['value'] = dl2
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)
+
+def sendReportListvalues(request):
+    response_json = {}
+    dl1 = []
+    dl2 = []
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        reportID = str(request.POST.get("reportID"))
+        reportInstance = ReportString.objects.filter(reportID=reportID)
+        for x in ReportList.objects.filter(reportID=reportInstance):
             dl1.append(x.key)
             dl2.append(x.value)
         response_json['key'] = dl1

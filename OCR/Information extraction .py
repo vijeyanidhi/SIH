@@ -69,7 +69,7 @@ def information_extract(path):
     #Function to extract Basic information related to Patient
     def Basic_details(text):
         dict_basic =  []
-        df_basic = pd.read_csv('/home/amit/Downloads/Lab Reports/Basic_details.csv')
+        df_basic = pd.read_csv('../Lab Reports/Basic_details.csv')
 
         #match = re.search(r'(Name|NAME)[\s]?[:]?[\s]?(MR|MRS|MS|Mr|Mrs|Ms|Patient|PATIENT)[.,]?[\s]?[a-zA-Z]+', text)
         pattern1=re.compile(r'(Name|NAME)[\s]?[:]?[\s]?(MR|MRS|MS|Mr|Ms|Mrs|PATIENT|Patient)?([\.]?[\s]?[a-zA-Z]+)')
@@ -106,7 +106,7 @@ def information_extract(path):
     #Function to extract information related to Blood tests
     def Blood_Test_Details(text):
         dict_blood =  []
-        df = pd.read_csv('/home/amit/Downloads/Lab Reports/lab report parameters  - Sheet1.csv')
+        df = pd.read_csv('../Lab Reports/lab report parameters  - Sheet1.csv')
         for i in range(len(df)):
             param = df['Parameter_Name'][i]
             match = re.search(df['Parameter_Name'][i]+' (\S+)', text)
@@ -122,7 +122,7 @@ def information_extract(path):
     #Function to extract information related to Urine tests
     def Urine_Test_Details(text):
         dict_urine =  []
-        df = pd.read_csv('/home/amit/Downloads/Lab Reports/URINE_TEST - Sheet1.csv')
+        df = pd.read_csv('../Lab Reports/URINE_TEST - Sheet1.csv')
         for i in range(len(df)):
             param = df['Fields'][i]
             match = re.search(param+' (\S+)', text)
@@ -137,7 +137,7 @@ def information_extract(path):
     #Function to extract information related to Liver tests
     def Liver_Test_Details(text):
         dict_liver =  []
-        df = pd.read_csv('/home/amit/Downloads/Lab Reports/LIVER FUNCTION PROFILE,SERUM - Sheet1.csv')
+        df = pd.read_csv('../Lab Reports/LIVER FUNCTION PROFILE,SERUM - Sheet1.csv')
         for i in range(len(df)):
             param = df['Fields'][i]
             match = re.search(param+' (\S+)', text)
@@ -153,7 +153,7 @@ def information_extract(path):
     #Function to extract information related to Stool tests
     def Stool_Test_Details(text):
         dict_stool =  []
-        df = pd.read_csv('/home/amit/Downloads/Lab Reports/STOOL_TEST - Sheet1.csv')
+        df = pd.read_csv('../Lab Reports/STOOL_TEST - Sheet1.csv')
         for i in range(len(df)):
             param = df['Fields'][i]
             match = re.search(param+' (\S+)', text)

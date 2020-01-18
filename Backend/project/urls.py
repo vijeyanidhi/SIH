@@ -40,5 +40,9 @@ urlpatterns = [
     url(r'^doctor/',doctor),
     url(r'^upload/',upload),
     url(r'^detail/',detail),
-    url(r'^getrep/',sendReport)
+    url(r'^getrep/',sendReportID),
+    url(r'^getreplistvalues/',sendReportListvalues),
+    url(r'^getrepbasicvalues/',sendReportBasicvalues),
+    url(r'^getrepvalues/',sendReportvalues),
+    url(r'^getrespstring/',sendReportStrings)
 ]
