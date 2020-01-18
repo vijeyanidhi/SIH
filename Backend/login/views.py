@@ -31,7 +31,7 @@ def diff(t_a, t_b,val):
 def mainPage(request):
     return render(request, 'main.html')
 
-def renderSignIn(request):
+def renderSignUp(request):
     return render(request, 'signup.html')
 
 def renderOption(request):
@@ -54,6 +54,15 @@ def docprofile(request):
 
 def checkerprofile(request):
     return render(request, 'checkerprofile.html')
+
+def customer(request):
+    return render(request, 'customer.html')
+
+def signin(request):
+    return render(request, 'signin.html')
+
+def doctor(request):
+    return render(request, 'doctor.html')
 
 @csrf_exempt
 def login(request):

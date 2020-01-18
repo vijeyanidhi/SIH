@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>About</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./../static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="./../static/css/customer.css">
+</head>
+
+<body>
+  <!-- nav bar  -->
+  <nav class="navbar navbar-invert navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-links"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./index.html">
+          <i class="fas fa-user-md fa-2x" style="color: red;"></i>
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-links">
+        <ul id="links" class="nav navbar-nav navbar-right">
+          <li> <a class="active" href="./customer.html">CUSTOMER</a></li>
+
+          <li> <a href="./doctor.html">DOCTOR</a></li>
+          <li id="user-signed-in"> <a href="./signup.html">SIGNUP</a></li>
+          <li id="log-in"> <a href="./login.html">LOGIN IN</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- nav bar ends -->
+
+
+  <!-- section 1 -->
+  <div class="sections section1">
+    <!-- <img src="image/about/about main pic.jpg" class="img-fluid" /> -->
+    <div style="margin: 5rem;">
+        <img id="image-output" src="" alt="upload-image" />
+        <input id="image-input" type="file" name="image" />
+      </div>
+        
+  </div>
+  <script>
+    function onImageChange(event) {
+      document.getElementById('image-output').src = URL.createObjectURL(event.target.files[0]);
+    }
+    function onImageClick(event) {
+      var x = event.pageX - this.offsetLeft;
+      var y = event.pageY - this.offsetTop;
+      console.log(x, y);
+    }
+    document.getElementById('image-input').onchange = onImageChange;
+    document.getElementById('image-output').ondblclick = onImageClick;
+  </script>
+
+</body>
+
+</html>
