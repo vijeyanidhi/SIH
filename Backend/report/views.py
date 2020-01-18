@@ -208,13 +208,20 @@ def sendReportListvalues(request):
 def sendTotalReport(request):
     response_json = {}
 
-    dl1 = []
-    dl2 = []
-    dl3 = []
-    dl4 = []
-    dl5 = []
-    dl6 = []
-    dl7 = []
+    dl1 = {}
+
+    problem=[]
+    treatment=[]
+    test=[]
+
+    dl2 = {}
+
+    dl3 = {}
+
+    blood={}
+    urine={}
+    liver={}
+    stool={}
 
     if request.method == 'POST':
         for x, y in request.POST.items():
@@ -223,30 +230,44 @@ def sendTotalReport(request):
         reportInstance = ReportString.objects.filter(reportID=reportID)
 
         for x in ReportList.objects.filter(reportID=reportInstance):
-            dl1.append(x.reportKey)
-            dl2.append(x.reportValue)
+            if(x.reportKey=="problem"):
+                problem.append(x.reportValue)
+            elif(x.reportKey=="treatment"):
+                treatment.append(x.reportValue)
+            elif(x.reportKey=="test"):
+                test.append(x.reportValue)
+
+        dl1['problem'] = problem
+        dl1['treatment'] = treatment
+        dl1['test'] = test
 
         for x in ReportBasic.objects.filter(reportID=reportInstance):
-            dl3.append(x.reportKey)
-            dl4.append(x.reportValue)
+            dl2[x.reportKey]=x.reportValue
 
         for x in ReportValues.objects.filter(reportID=reportInstance):
-            dl5.append(x.reporttype)
-            dl6.append(x.reportKey)
-            dl7.append(x.reportValue)
-        print(reportID)
+
+            if(x.reporttype == "blood report"):
+                blood[x.reportKey] = x.reportValue
+            elif(x.reporttype == "urine report"):
+                urine[x.reportKey] = x.reportValue  
+            elif(x.reporttype == "liver report"):
+                liver[x.reportKey] = x.reportValue  
+            elif(x.reporttype == "stool report"):
+                stool[x.reportKey] = x.reportValue  
+          
+        dl3['blood report']=blood
+        dl3['urine report']=urine
+        dl3['liver report']=liver
+        dl3['stool report']=stool
+
         response_json['comment'] = ReportString.objects.get(reportID=reportID).comments
         response_json['summary'] = ReportString.objects.get(reportID=reportID).summary
 
-        response_json['listkey'] = dl1
-        response_json['listvalue'] = dl2
+        response_json['list'] = dl1
 
-        response_json['basickey'] = dl3
-        response_json['basicvalue'] = dl4
+        response_json['basic'] = dl2
 
-        response_json['reptype'] = dl5
-        response_json['repkey'] = dl6
-        response_json['repvalue'] = dl7
+        response_json['report_value'] = dl3
 
         response_json['success'] = True
         response_json['message'] = 'Successful'
