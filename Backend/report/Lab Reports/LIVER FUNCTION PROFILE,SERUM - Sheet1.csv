@@ -1,0 +1,31 @@
+Fields,Ranges
+"BILIRUBIN, TOTAL",0.1-1.2
+"BILIRUBIN, DIRECT",0.00-0.30
+"BILIRUBIN, INDIRECT",0.10-1.00
+TOTAL PROTEIN,6.0-8.30
+PROTEIN,6.0-8.31
+BILIRUBIN,0.1-1.2
+ALBUMIN,3.2-5.0
+GLOBULIN,2.0-4.1
+ALBUMIN/GLOBULIN RATIO,1.0-2.1
+ASPARTATE AMINOTRANSFERASE,<45
+ALANINE AMINOTRANSFERASE,<45
+ALKALINE PHOSPHATASE,41-137
+GAMMA GLUTAMYL TRANSFERASE,"<=50
+"
+LACTATE DEHYDROGENASE,200-450
+"Bilirubin, Total",0.1-1.2
+"Bilirubin, Direct",0.00-0.30
+"Bilirubin, Indirect",0.10-1.00
+Total Protein,6.0-8.30
+Protein,6.0-8.31
+Bilirubin,0.1-1.2
+Albumin,3.2-5.0
+Globulin,2.0-4.1
+Albulin/Globulin Ratio,1.0-2.1
+Aspartate Aminotransferase,<45
+Alanine Aminotransferase,<45
+Alkaline Phosphatase,41-137
+Gamma Glutamyl Transferase,"<=50
+"
+Lactate Dehydrogenase,200-450

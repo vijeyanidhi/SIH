@@ -1,0 +1,59 @@
+Fields,Ranges
+COLOR,YELLOW
+APPEARANCE,CLEAR
+SPECIFIC GRAVITY,1.001-1.035
+PH,5.0-8.0
+GLUCOSE,NEGATIVE
+REDUCING SUBSTANCES,NEGATIVE
+BILIRUBIN,NEGATIVE
+KETONES,NEGATIVE
+OCCULT BLOOD,NEGATIVE
+PROTEIN,NEGATIVE
+NITRITE,NEGATIVE
+LEUKOCYTE ESTERASE,NEGATIVE
+WBC,0-5
+WHITE BLOOD CELLS COUNT,0-5
+RBC,0-3
+RED BLOOD CELLS COUNT,0-3
+SQUAMOUS EPITHELIAL CELLS,0-5
+TRANSITIONAL EPITHELIAL CELLS,0-5
+RENAL EPITHELIAL CELLS,0-3
+BACTERIA,NONE
+CALCIUM OXALATE CRYSTALS,NONE OR FEW
+TRIPLE PHOSPHATE CRYSTALS,NONE OR FEW
+URIC ACID CRYSTALS,NONE OR FEW
+AMORPHOUS SEDIMENT,NONE OR FEW
+CRYSTALS,NONE
+HYALINE CAST,NONE
+GRANULAR CAST,NONE
+CASTS,NONE
+YEAST,NONE
+Color,Yellow
+Appearance,Clear
+Specific Gravity,1.001-1.035
+pH,5.0-8.0
+Glucose,Negative
+Reducing Substances,Negative
+Bilirubin,Negative
+Ketones,Negative
+Occult Blood,Negative
+Protein,Negative
+Nitrite,Negative
+Leukocyte Esterase,Negative
+WBC,0-5
+White Blood Cells Count,0-5
+RBC,0-3
+Red Blood Cells Count,0-3
+Squamous Epithelial Cells,0-5
+Transitional Epithelial Cells,0-5
+Renal Epithelial Cells,0-3
+Bacteria,None
+Calcium Oxalate Crystals,None Or Few
+Triple Phosphate Crystals,None Or Few
+Uric Acid Crystals,None Or Few
+Amorphous Sediment,None Or Few
+Crystals,None
+Hyaline Cast,None
+Granular Cast,None
+Casts,None
+Yeast,None
