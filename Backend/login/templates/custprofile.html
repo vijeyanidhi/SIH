@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>sign in</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/sign-in.css">
+    <style>
+        .main {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+        }
+        body{
+            background-color: #6232a8;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+      
+   <script>
+       function getCustInfo() {
+                  $.ajax({
+                      url: "http://localhost:8000/custinfo/",
+                      type: "POST",
+                      data: {
+                          ident: 7
+                            // ident: sessionStorage.getItem("ident")
+                      },
+                      success: function(response){
+                          console.log(response);
+              
+                      }
+                  })
+                }
+                getCustInfo();
+
+   </script>
+</body>
+</html>

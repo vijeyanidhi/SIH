@@ -43,6 +43,15 @@ def renderInpDoctor(request):
 def renderInpChecker(request):
     return render(request, 'inpchecker.html')
 
+def custprofile(request):
+    return render(request, 'custprofile.html')
+
+def docprofile(request):
+    return render(request, 'docprofile.html')
+
+def checkerprofile(request):
+    return render(request, 'checkerprofile.html')
+
 @csrf_exempt
 def login(request):
     response_json = {}

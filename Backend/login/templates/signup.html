@@ -50,7 +50,7 @@
         event.preventDefault();
         var emailID = event.target.emailID.value;
         $.ajax({
-          url: "http://127.0.0.1:8000/verifymail/",
+          url: "http://localhost:8000/verifymail/",
           type: "POST",
           data: {
             emailID: emailID,
@@ -66,7 +66,7 @@
         var emailID = document.getElementById('emailID').value;
         var OTP = event.target.otp.value;
         $.ajax({
-          url: "http://127.0.0.1:8000/verifyotp/",
+          url: "http://localhost:8000/verifyotp/",
           type: "POST",
           data: {
             emailID: emailID,
@@ -74,7 +74,8 @@
           },
           success: function(response) {
             if(response.otp) {
-              window.location.href = 'http://127.0.0.1:8000/option/';
+              sessionStorage.setItem('emailID', emailID);
+              window.location.href = 'http://localhost:8000/option/';
             }
             else
             {

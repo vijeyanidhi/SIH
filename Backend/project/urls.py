@@ -29,5 +29,10 @@ urlpatterns = [
     url(r'^inpcustomer/',renderInpCustomer),
     url(r'^inpdoctor/',renderInpDoctor),
     url(r'^inpchecker/',renderInpChecker),
-    url(r'^signup/',signup)
+    url(r'^signup/',signup),
+    url(r'^custprofile/',custprofile),
+    url(r'^docprofile/',docprofile),
+    url(r'^checkerprofile/',checkerprofile),
+    url(r'^custinfo/',info),
+      
 ]
