@@ -21,7 +21,11 @@ class Report(models.Model):
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+    def __unicode__(self):
+        return str(self.reportID)
+
 class ReportContent(models.Model):
+    ReportID = models.ForeignKey(Report, null=True)
     termName = models.ForeignKey(TermData, null=True)
     value = models.CharField(max_length=240, blank=False, null=True)
     units = models.CharField(max_length=240, blank=False, null=True)

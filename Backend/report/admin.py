@@ -12,3 +12,17 @@ class TermDataAdmin(admin.ModelAdmin):
 
 admin.site.register(TermData, TermDataAdmin)
 
+
+
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ["reportID","customerIdent","doctorName","modified","created"]
+    search_fields = ["reportID","customerIdent","doctorName,"modified","created"]
+
+admin.site.register(Report, ReportAdmin)
+
+class ReportContentAdmin(admin.ModelAdmin):
+    list_display = ["ReportID","termName","value","units","refValue","modified","created"]
+    search_fields = ["ReportID","modified","created"]
+
+admin.site.register(ReportContent, ReportContentAdmin)
+

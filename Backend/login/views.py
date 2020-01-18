@@ -138,7 +138,6 @@ def verify2(request):
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
         OTP = int(request.POST.get("OTP"))
-            
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
         stop = datetime.strptime(OTPDataInstance.stop, '%d/%m/%Y %H:%M:%S')
         if(OTPDataInstance.otp == OTP and diff(datetime.now,stop,15)):
@@ -154,3 +153,8 @@ def verify2(request):
 
 def renderSignIn(request):
     return render(request, 'signup.html')
+
+@csrf_exempt
+def sendmail(request):
+    message = 'OTP for your account verification is '
+    sendMail('OTP For email Verification',message,"vijay")
