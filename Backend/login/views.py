@@ -18,8 +18,8 @@ from Mail import sendMail
 def random_char(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
-#def random_int(y):
-#       return ''.join(string(random.randints(0,9) for x in range(y))
+def ranint(y):
+       return ''.join(str(random.randint(0,9)) for x in range(y))
 
 
 @csrf_exempt
@@ -112,7 +112,7 @@ def verify1(request):
         sendMail('OTP For email Verification',message,emailID)
         stop = datetime.now() + timedelta(minutes = 15)
         stop = stop.strftime("%d/%m/%Y %H:%M:%S")
-        OTPData.objects.create(emailID=emailID,OTP=OTP,stop=stop)
+        OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -141,7 +141,7 @@ def verify2(request):
             
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
         stop = datetime.strptime(OTPDataInstance.stop, '%d/%m/%Y %H:%M:%S')
-        if(OTPDataInstance.OTP == OTP and diff(datetime.now,stop,15)):
+        if(OTPDataInstance.otp == OTP and diff(datetime.now,stop,15)):
             setattr(OTPDataInstance,'flag',True)
         response_json['success'] = True
         response_json['message'] = 'Successful'
