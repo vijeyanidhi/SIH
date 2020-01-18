@@ -28,6 +28,12 @@ def diff(t_a, t_b,val):
     else:
         return True
 
+def renderSignIn(request):
+    return render(request, 'signup.html')
+
+def renderOption(request):
+    return render(request, 'option.html')
+
 @csrf_exempt
 def login(request):
     response_json = {}
@@ -116,12 +122,17 @@ def verifymail(request):
         emailID = str(request.POST.get("emailID"))
         OTP = int(ranint(7))
         message = 'OTP for your account verification is ' + str(OTP)
-        print(emailID)
-        print(str(request.POST.get("message")))
         sendMail('OTP For email Verification',message,emailID)
         stop = datetime.now() + timedelta(minutes = 15)
         stop = str(stop.strftime("%d/%m/%Y %H:%M:%S"))
-        OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
+        if OTPData.objects.filter(emailID = emailID).exists():
+            row=OTPData.objects.get(emailID = emailID)
+            setattr(row,'otp',OTP)
+            setattr(row,'flag',False)
+            setattr(row,'stop',stop)
+            row.save()
+        else:
+            OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -155,15 +166,3 @@ def verifyotp(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
-
-def renderSignIn(request):
-    return render(request, 'signup.html')
-
-
-def renderOption(request):
-    return render(request, 'option.html')
-
-@csrf_exempt
-def sendmail(request):
-    message = 'OTP for your account verification is '
-    sendMail('OTP For email Verification',message,"transfervijay@gmail.com")

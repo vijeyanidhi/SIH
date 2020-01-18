@@ -25,7 +25,4 @@ urlpatterns = [
     url(r'^verifymail/',verifymail),
     url(r'^verifyotp/',verifyotp),
     url(r'^option/',renderOption),
-
-    url(r'^mail/',sendmail)
-
 ]
