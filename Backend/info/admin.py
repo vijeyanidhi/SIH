@@ -23,6 +23,11 @@ class CheckerDataAdmin(admin.ModelAdmin):
 
 admin.site.register(CheckerData, CheckerDataAdmin)
 
+class customerDoctorAdmin(admin.ModelAdmin):
+    list_display = ["ident","Doctor","modified","created"]
+    search_fields = ["ident","Doctor","modified","created"]
+
+admin.site.register(customerDoctor, customerDoctorAdmin)
 
 
 
