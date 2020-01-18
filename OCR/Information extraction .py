@@ -51,21 +51,6 @@ def deskew(image):
 def match_template(image, template):
     return cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED) 
 
-#Image pre-processing before feeding it to OCR algorithm
-factor = 2
-img = cv2.imread('test4.png')
-img = cv2.resize(img, (factor*img.shape[1],factor*img.shape[0]), interpolation = cv2.INTER_CUBIC)
-img = get_grayscale(img)
-img = deskew(img)
-#img = thresholding(img)
-
-#Text extraction by OCR (line by line)
-custom_config = r'--oem 3 --psm 6'
-text = pytesseract.image_to_string(img, config=custom_config)
-file1 = open("raw_text.txt","w") 
-file1.write(text)  
-file1.close()
-
 #Function to extract Basic information related to Patient
 def Basic_details(text):
     dict_basic =  []
@@ -91,8 +76,6 @@ def Basic_details(text):
     dict_basic = pd.DataFrame(dict_basic, columns=['Basic details', 'Values'])
     return dict_basic        
 
-dict_basic = Basic_details(text)
-
 #Function to extract information related to Blood tests
 def Blood_Test_Details(text):
     dict_blood =  []
@@ -107,7 +90,6 @@ def Blood_Test_Details(text):
     dict_blood = pd.DataFrame(dict_blood, columns=['Sections', 'Values Obtained'])  
     return dict_blood
 
-dict_blood = Blood_Test_Details(text)
 
 #Function to extract information related to Urine tests
 def Urine_Test_Details(text):
@@ -121,8 +103,8 @@ def Urine_Test_Details(text):
             dict_urine.append([param, weather])
 
     dict_urine = pd.DataFrame(dict_urine, columns=['Sections', 'Values Obtained'])
-    
-dict_urine = Urine_Test_Details(text)
+    return dict_urine
+
 
 #Extracting comments from report
 def comment_extract(text):
@@ -131,32 +113,47 @@ def comment_extract(text):
     before_keyword, keyword, after_keyword = mystring.partition(keyword)
     return after_keyword
 
-Comments_Report = comment_extract(text)
-
 def report_summary(text):
     return summarize(text)
 
-Summary = report_summary(Comments_Report)
+def process_img(fp):
+#Image pre-processing before feeding it to OCR algorithm
+    factor = 2
+    img = cv2.imread(fp)
+    img = cv2.resize(img, (factor*img.shape[1],factor*img.shape[0]), interpolation = cv2.INTER_CUBIC)
+    img = get_grayscale(img)
+    img = deskew(img)
+#img = thresholding(img)
+
+#Text extraction by OCR (line by line)
+    custom_config = r'--oem 3 --psm 6'
+    text = pytesseract.image_to_string(img, config=custom_config)
+    file1 = open("raw_text.txt","w") 
+    file1.write(text)  
+    file1.close()
+    
+    dict_basic = Basic_details(text)    
+    dict_blood = Blood_Test_Details(text)
+    dict_urine = Urine_Test_Details(text)
+    Comments_Report = comment_extract(text)
+    Summary = report_summary(Comments_Report)
 
 #Problem, tests and treatment extraction from reports
-arg1 = 'raw_text.txt'
-
-os.system("CliNER/cliner predict --txt " + arg1 + " --out CliNER/data/predictions --model CliNER/models/silver.crf.1 --format i2b2")
-file1 = open("/home/amit/CliNER/data/predictions/raw_text.con","r+")
-data = file1.readlines()
-list_problem = []
-list_treatment = []
-list_tests = []
-for i in range(len(data)):
-    description = data[i].split('"')[1]
-    inference = data[i].split('"')[3]
-    if inference=='problem':
-        list_problem.append(description)
-    elif inference=='treatment':
-        list_treatment.append(description)
-    else:
-        list_tests.append(description)
-        
-print(list_problem)
-print(list_treatment)
-print(list_tests)
+    arg1 = 'raw_text.txt'
+    os.system("CliNER/cliner predict --txt " + arg1 + " --out CliNER/data/predictions --model CliNER/models/silver.crf.1 --format i2b2")
+    file1 = open("/home/amit/CliNER/data/predictions/raw_text.con","r+")
+    data = file1.readlines()
+    list_problem = []
+    list_treatment = []
+    list_tests = []
+    for i in range(len(data)):
+        description = data[i].split('"')[1]
+        inference = data[i].split('"')[3]
+        if inference=='problem':
+            list_problem.append(description)
+        elif inference=='treatment':
+            list_treatment.append(description)
+        else:
+            list_tests.append(description)
+    
+    return list_problem,list_treatment,list_tests,dict_basic,dict_blood,dict_urine,Comments_Report,Summary

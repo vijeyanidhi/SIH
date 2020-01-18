@@ -12,24 +12,15 @@ class TermDataAdmin(admin.ModelAdmin):
 
 admin.site.register(TermData, TermDataAdmin)
 
+class ReportStringAdmin(admin.ModelAdmin):
+    list_display = ["reportID","comments","summary","modified","created"]
+    search_fields = ["reportID","comments","summary","modified","created"]
 
+admin.site.register(ReportString, ReportStringAdmin)
 
-class ReportAdmin(admin.ModelAdmin):
-    list_display = ["reportID","customerIdent","doctorName","modified","created"]
-    search_fields = ["reportID","customerIdent","doctorName","modified","created"]
+class ReportValuesAdmin(admin.ModelAdmin):
+    list_display = ["reportID","reporttype","reportKey","reportValue","modified","created"]
+    search_fields = ["reportID","reporttype","reportKey","reportValue","modified","created"]
 
-admin.site.register(Report, ReportAdmin)
-
-class ReportContentAdmin(admin.ModelAdmin):
-    list_display = ["ReportID","termName","value","units","refValue","modified","created"]
-    search_fields = ["ReportID","modified","created"]
-
-admin.site.register(ReportContent, ReportContentAdmin)
-
-
-class reportuploadAdmin(admin.ModelAdmin):
-    list_display = ["ident","image_url","modified","created"]
-    search_fields = ["ident","modified","created"]
-
-admin.site.register(reportupload, reportuploadAdmin)
+admin.site.register(ReportValues, ReportValuesAdmin)
 
