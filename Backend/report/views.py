@@ -97,7 +97,10 @@ def sendReportID(request):
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
-        for x in ReportString.objects.all().values("reportID").distinct():
+        emailID = str(request.POST.get("email"))
+        ResetDataInstance = ResetData.objects.get(emailID=emailID)
+        LoginDataInstance = ResetDataInstance.ident
+        for x in ReportString.objects.filter(ident=LoginDataInstance).distinct():
             ret_list.append(x)
         response_json['data_list'] = ret_list
         response_json['success'] = True
