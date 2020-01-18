@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 
-from django.core.mail import send_mail
+from Mail import sendMail
 
 import os
 from PIL import Image
@@ -281,7 +281,7 @@ def sendTotalReport(request):
     return JsonResponse(response_json)
 
 @csrf_exempt
-def sendTotalReport(request):
+def sendReportOCR(request):
 
     if request.method == 'POST':
         for x, y in request.POST.items():
@@ -289,8 +289,9 @@ def sendTotalReport(request):
         reportID = str(request.POST.get("reportID"))
         reportfault = str(request.POST.get("status"))
         
-        if(reportfault == "True")
-   
+        if(reportfault == "True"):
+            message = 'OCR Mismatch for ' + reportID + '. Please verify.'
+            sendMail('OCR Mismatch',message,"vijeyanidhi@gmail.com")
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
