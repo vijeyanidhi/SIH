@@ -19,5 +19,7 @@ from login.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/', login)
+    url(r'^login1/', login),
+    url(r'^login/',renderSignIn),
+    url(r'^verify1/',verify1)
 ]

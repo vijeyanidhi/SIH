@@ -13,13 +13,13 @@ class LoginDataAdmin(admin.ModelAdmin):
 admin.site.register(LoginData, LoginDataAdmin)
 
 class ResetDataAdmin(admin.ModelAdmin):
-    list_display = ["ident","name","emailID","mobile","modified","created"]
-    search_fields = ["ident","name","emailID","mobile","modified","created"]
+    list_display = ["ident","name","mobile","modified","created"]
+    search_fields = ["ident","name","mobile","modified","created"]
 
 admin.site.register(ResetData, ResetDataAdmin)
 
 class OTPDataAdmin(admin.ModelAdmin):
-    list_display = ["ident","name","emailID","mobile","modified","created"]
-    search_fields = ["ident","name","emailID","mobile","modified","created"]
+    list_display = ["emailID","otp","flag","stop","modified","created"]
+    search_fields = ["emailID","modified","created"]
 
 admin.site.register(OTPData, OTPDataAdmin)

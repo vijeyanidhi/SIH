@@ -117,7 +117,7 @@ def verify2(request):
             
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
 
-        if(OTPDataInstance.OTP == OTP and ): # timenow less than stop time ):
+        if(OTPDataInstance.OTP == OTP ):#and ): # timenow less than stop time ):
             setattr(OTPDataInstance,'flag',True)
         response_json['success'] = True
         response_json['message'] = 'Successful'
@@ -127,3 +127,6 @@ def verify2(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+def renderSignIn(request):
+    return render(request, 'signup.html')

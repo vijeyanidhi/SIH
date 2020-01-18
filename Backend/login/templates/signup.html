@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>sign in</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/sign-in.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="container-azad">
+      <div class="row">
+        <div class="col-xs-4">
+
+        </div>
+        <div class="col-xs-4">
+          <form action="/verify1/" method="post">
+            <h4>Sign Up</h4>
+            <div class="form-group">
+              <label for="name">Email address</label>
+              <input type="text" class="form-control" id="name" name="username" placeholder="Name" ><br>        
+              <button type="submit" class="btn btn-default" name="login" onclick="">Send OTP</button>
+            </div>
+          </form>
+          <form action="/public/login.html" method="post">
+            <div class="form-group">
+              <label for="Password">OTP</label>
+              <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+            </div>
+            <!-- <a href="./features.html"><button class="btn btn-primary btn-lg">FEATURES</button></a> -->
+            <a href="./index.html"><button class="btn btn-default" name="verify">Verify</button> </a>
+          </form>
+        </div>
+        <div class="col-xs-4">
+          <a class="cross" href="./index.html"> <img src="./image/contact-us/cross.png"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
