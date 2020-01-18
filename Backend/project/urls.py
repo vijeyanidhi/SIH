@@ -44,5 +44,6 @@ urlpatterns = [
     url(r'^getreplistvalues/',sendReportListvalues),
     url(r'^getrepbasicvalues/',sendReportBasicvalues),
     url(r'^getrepvalues/',sendReportvalues),
-    url(r'^getrespstring/',sendReportStrings)
+    url(r'^getrepstring/',sendReportStrings),
+    url(r'^getReportTotal/',sendTotalReport)
 ]

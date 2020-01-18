@@ -179,6 +179,7 @@ def sendReportBasicvalues(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
+@csrf_exempt
 def sendReportListvalues(request):
     response_json = {}
     dl1 = []
@@ -199,5 +200,58 @@ def sendReportListvalues(request):
         response_json['success'] = False
         response_json['message'] = "Not Post Method"
 
+    print (str(response_json))
+    return JsonResponse(response_json)
+
+
+@csrf_exempt
+def sendTotalReport(request):
+    response_json = {}
+
+    dl1 = []
+    dl2 = []
+    dl3 = []
+    dl4 = []
+    dl5 = []
+    dl6 = []
+    dl7 = []
+
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        reportID = str(request.POST.get("reportID"))
+        reportInstance = ReportString.objects.filter(reportID=reportID)
+
+        for x in ReportList.objects.filter(reportID=reportInstance):
+            dl1.append(x.key)
+            dl2.append(x.value)
+
+        for x in ReportBasic.objects.filter(reportID=reportInstance):
+            dl3.append(x.key)
+            dl4.append(x.value)
+
+        for x in ReportValues.objects.filter(reportID=reportInstance):
+            dl5.append(x.type)
+            dl6.append(x.key)
+            dl7.append(x.value)
+
+        response_json['comment'] = reportInstance.comment
+        response_json['summary'] = reportInstance.summary
+
+        response_json['listkey'] = dl1
+        response_json['listvalue'] = dl2
+
+        response_json['basickey'] = dl3
+        response_json['basicvalue'] = dl4
+
+        response_json['reptype'] = dl5
+        response_json['repkey'] = dl6
+        response_json['repvalue'] = dl7
+
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
     print (str(response_json))
     return JsonResponse(response_json)
