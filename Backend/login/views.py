@@ -34,6 +34,15 @@ def renderSignIn(request):
 def renderOption(request):
     return render(request, 'option.html')
 
+def renderInpCustomer(request):
+    return render(request, 'inpcustomer.html')
+
+def renderInpDoctor(request):
+    return render(request, 'inpdoctor.html')
+
+def renderInpChecker(request):
+    return render(request, 'inpchecker.html')
+
 @csrf_exempt
 def login(request):
     response_json = {}
@@ -155,8 +164,10 @@ def verifyotp(request):
         if(OTPDataInstance.otp == OTP and diff(datetime.now(),stop,15)):
             setattr(OTPDataInstance,'flag',True)
             OTPDataInstance.save()
+            response_json['otp'] = True
             response_json['otpmsg'] = 'successful'
         else:
+            response_json['otp'] = False
             response_json['otpmsg'] = 'not successful'
         response_json['success'] = True
         response_json['message'] = 'Successful'

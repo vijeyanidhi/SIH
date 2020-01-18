@@ -73,8 +73,12 @@
             OTP: OTP
           },
           success: function(response) {
-            if(response.success) {
+            if(response.otp) {
               window.location.href = 'http://127.0.0.1:8000/option/';
+            }
+            else
+            {
+              alert(response.otpmsg);
             }
           }
         })

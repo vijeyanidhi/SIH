@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from login.views import *
 from report.views import *
+from info.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +26,8 @@ urlpatterns = [
     url(r'^verifymail/',verifymail),
     url(r'^verifyotp/',verifyotp),
     url(r'^option/',renderOption),
+    url(r'^inpcustomer/',renderInpCustomer),
+    url(r'^inpdoctor/',renderInpDoctor),
+    url(r'^inpchecker/',renderInpChecker),
+    url(r'^signup/',signup)
 ]

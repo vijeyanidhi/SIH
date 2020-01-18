@@ -17,7 +17,7 @@ def signup(request):
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         password = str(request.POST.get("password"))
-        accessLevel = str(request.POST.get("accessLevel"))
+        accessLevel = str(request.POST.get("accessLevel"))  #customer, doctor,checker
         name = str(request.POST.get("name"))
         emailID = str(request.POST.get("emailID"))
         mobile = str(request.POST.get("mobile"))
@@ -40,14 +40,14 @@ def signup(request):
 
         if accessLevel == "customer":
             customerrow = CustomerData.objects.create(ident = loginrow, houseNumber = houseNumber, streetName = streetName, area = area, city = city, state = state, country = country)
-            customerrow = .save()
+            customerrow.save()
         elif accessLevel == "doctor":
             doctorrow = DoctorData.objects.create(ident = loginrow, houseNumber = houseNumber, streetName = streetName, area = area, city = city, state = state, country = country)
             doctorrow.save()
         elif accessLevel == "checker":
             checkerrow = CheckerData.objects.create(ident = loginrow, houseNumber = houseNumber, streetName = streetName, area = area, city = city, state = state, country = country)
             checkerrow.save()
-        else
+        else:
             print(name)
             print("error wrong access Level entered")
         response_json['success'] = True
@@ -107,7 +107,7 @@ def update(request):
         setattr(row,'city',city)
         setattr(row,'state',state)
         setattr(row,'country',country)
-        row = .save()
+        row.save()
 
         response_json['success'] = True
         response_json['message'] = 'Successful'
