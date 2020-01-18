@@ -14,27 +14,21 @@ class TermData(models.Model):
     def __unicode__(self):
         return str(self.termName)
 
-class Report(models.Model):
+class ReportString(models.Model):
     reportID = models.CharField(max_length=240, blank=False, null=True)
-    customerIdent = models.ForeignKey(LoginData)
-    doctorName = models.CharField(max_length=240, blank=False, null=True)
+    comments = models.CharField(max_length=240, blank=False, null=True)
+    summary = models.CharField(max_length=240, blank=False, null=True)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __unicode__(self):
         return str(self.reportID)
 
-class ReportContent(models.Model):
-    ReportID = models.ForeignKey(Report, null=True)
-    termName = models.ForeignKey(TermData, null=True)
-    value = models.CharField(max_length=240, blank=False, null=True)
-    units = models.CharField(max_length=240, blank=False, null=True)
-    refValue = models.CharField(max_length=240, blank = False, null=True)
+class ReportValues(models.Model):
+    reportID = models.ForeignKey(ReportString)
+    reporttype = models.CharField(max_length=240, blank=False, null=True)
+    reportKey = models.CharField(max_length=240, blank=False, null=True)
+    reportValue = models.CharField(max_length=240, blank=False, null=True)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
-class reportupload(models.Model):
-    ident = models.ForeignKey(LoginData)
-    image_url = models.CharField(max_length=240, blank=False, null=True)
-    modified = models.DateTimeField(auto_now=True, auto_now_add=False)
-    created = models.DateTimeField(auto_now=False, auto_now_add=True)

@@ -7,7 +7,7 @@ Vijeyanidhi
 Mayank
 
 OCR
-Nishee
+Nishee Sharma
 Vikas Yadav
 Amit Kumar Jena
 

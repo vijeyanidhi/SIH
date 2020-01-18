@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^doctor/',doctor),
     url(r'^upload/',upload),
     url(r'^detail/',detail),
+    url(r'^getrep/',sendReport)
 ]

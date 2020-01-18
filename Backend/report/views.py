@@ -10,6 +10,7 @@ from .models import *
 from django.core.mail import send_mail
 
 import os
+from PIL import Image
 # Create your views here.
 
 @csrf_exempt
@@ -31,71 +32,6 @@ def AddTermName(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
-@csrf_exempt
-def AddReport(request):
-    response_json = {}
-    if request.method == 'POST':
-        for x, y in request.POST.items():
-            print("key,value", x, ":", y)
-        ident = str(request.POST.get("ident"))
-# get data form OCR 
-        IdentInstance = LoginData.objects.get(ident=ident)
-#        doctorName
-#        Report.objects.create(reportID = reportID,customerIdent=IdentInstance,doctorName=doctorName)
-#        ReportIDInstance=Report.objects.get(reportID=reportID)
-#        for x in data:    
-#            ReportContent.objects.create(ReportID = ReportIDInstance,termName=TermData.objects.get(termName=termName),value=value,units=units,refValue=refValue)
-        response_json['success'] = True
-        response_json['message'] = 'Successful'
-    else:
-        response_json['success'] = False
-        response_json['message'] = "Not Post Method"
-
-    print (str(response_json))
-    return JsonResponse(response_json)
-
-@csrf_exempt
-def reportList(request):
-    reponse_json = {}
-    retlist = []
-    if request.method == 'POST':
-        for x, y in request.POST.items():
-            print("key,value", x, ":", y)
-        ident = str(request.POST.get("ident"))
-        for x in Report.objects.filter(customerIdent = LoginData.objects.get(ident=ident)):
-            retlist.append(x.reportID)
-        response_json['data'] = retlist
-        response_json['success'] = True
-        response_json['message'] = 'Successful'
-    else:
-        response_json['success'] = False
-        response_json['message'] = "Not Post Method"
-
-    print (str(response_json))
-    return JsonResponse(response_json)
-
-@csrf_exempt
-def reportContent(request):
-    reponse_json = {}
-    retlist = []
-    if request.method == 'POST':
-        for x, y in request.POST.items():
-            print("key,value", x, ":", y)
-        reportID = str(request.POST.get("reportID"))
-        for x in ReportContent.objects.filter(ReportID = Report.objects.get(reportID=reportID)):
-            contentList = {'termName':x.termName,'value':x.value,'untis':x.units,'refValue':refValue}
-            retlist.append(contentList)
-        response_json['data'] = retlist
-        response_json['success'] = True
-        response_json['message'] = 'Successful'
-    else:
-        response_json['success'] = False
-        response_json['message'] = "Not Post Method"
-
-    print (str(response_json))
-    return JsonResponse(response_json)
-
-
 def handle_uploaded_file(file, filename):
     if not os.path.exists('upload/'):
         os.mkdir('upload/')
@@ -106,11 +42,37 @@ def handle_uploaded_file(file, filename):
 
 @csrf_exempt
 def upload(request):
-    response_json = {}
+    reponse_json = {}
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
+        response_json['success'] = True
+        response_json['message'] = 'Successful'
+    else:
+        response_json['success'] = False
+        response_json['message'] = "Not Post Method"
+
+    print (str(response_json))
+    return JsonResponse(response_json)
+
+def process(fp,values):
+    im = Image.open(fp)
+    im1 = im.crop((values))
+    im1.save()
+    Comments_Report,Summary,list_problem,list_treatment,list_tests,dict_basic,dict_blood,dict_urine = process_img(fp)
+    
+    
+@csrf_exempt
+def sendReport(request):
+    response_json = {}
+    ret_list = []
+    if request.method == 'POST':
+        for x, y in request.POST.items():
+            print("key,value", x, ":", y)
+        for x in ReportString.objects.all().values("reportID").distinct():
+            ret_list.append(x)
+        response_json['data_list'] = ret_list
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
