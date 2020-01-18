@@ -255,10 +255,10 @@ def sendTotalReport(request):
             elif(x.reporttype == "stool report"):
                 stool[x.reportKey] = x.reportValue  
           
-        dl3['blood report']=blood
-        dl3['urine report']=urine
-        dl3['liver report']=liver
-        dl3['stool report']=stool
+        dl3['bloodReport']=blood
+        dl3['urineReport']=urine
+        dl3['liverReport']=liver
+        dl3['stoolReport']=stool
 
         response_json['comment'] = ReportString.objects.get(reportID=reportID).comments
         response_json['summary'] = ReportString.objects.get(reportID=reportID).summary
