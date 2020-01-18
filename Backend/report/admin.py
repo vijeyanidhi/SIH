@@ -28,7 +28,7 @@ admin.site.register(ReportContent, ReportContentAdmin)
 
 
 class reportuploadAdmin(admin.ModelAdmin):
-    list_display = ["ident","image","modified","created"]
+    list_display = ["ident","image_url","modified","created"]
     search_fields = ["ident","modified","created"]
 
 admin.site.register(reportupload, reportuploadAdmin)

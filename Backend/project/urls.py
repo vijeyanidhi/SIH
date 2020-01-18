@@ -38,5 +38,5 @@ urlpatterns = [
     url(r'^custinfo/',info),
     url(r'^customer/',customer),
     url(r'^doctor/',doctor),
-      
+    url(r'^upload/',upload),
 ]
