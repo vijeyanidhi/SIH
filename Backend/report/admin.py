@@ -24,3 +24,9 @@ class ReportValuesAdmin(admin.ModelAdmin):
 
 admin.site.register(ReportValues, ReportValuesAdmin)
 
+class ReportBasicAdmin(admin.ModelAdmin):
+    list_display = ["reportID","reporttype","reportKey","reportValue","modified","created"]
+    search_fields = ["reportID","reporttype","reportKey","reportValue","modified","created"]
+
+admin.site.register(ReportBasic, ReportBasicAdmin)
+

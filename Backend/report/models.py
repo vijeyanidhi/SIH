@@ -32,3 +32,9 @@ class ReportValues(models.Model):
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
+class ReportBasic(models.Model):
+    reportID = models.ForeignKey(ReportString)
+    reportKey = models.CharField(max_length=240, blank=False, null=True)
+    reportValue = models.CharField(max_length=240, blank=False, null=True)
+    modified = models.DateTimeField(auto_now=True, auto_now_add=False)
+    created = models.DateTimeField(auto_now=False, auto_now_add=True)
