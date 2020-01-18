@@ -5,9 +5,14 @@ from django.shortcuts import render
 
 from login.models import *
 
+import random
+from datetime import datetime, timedelta 
+from dateutil.relativedelta import relativedelta
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from Mail import sendMail
 
 # Create your views here.
 
@@ -34,6 +39,10 @@ def login(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
+
+def random_char(y):
+       return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
 @csrf_exempt
 def reset_password(request):
     response_json = {}
@@ -42,10 +51,12 @@ def reset_password(request):
             print("key,value", x, ":", y)
         ident = str(request.POST.get("ident"))
         if LoginData.objects.filter(ident=ident).exists():
-#            generate new password
+            genpassword(10)
             row = LoginData.objects.get(ident=ident)
-#            setattr(row,'password',genpassword)
-#            send mail
+            setattr(row,'password',genpassword)
+            row.save()
+            message = 'Password for your account has been successfully reset to ' + genpassword + '. Please be careful in the future.'
+            sendMail('Password Reset',message,ResetData.objects.get(ident=row).emailID)
             response_json['reset'] = True
             response_json['resetMessage'] = 'Reset Successful'
         else:
@@ -69,7 +80,9 @@ def forgot_Ident(request):
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
         if LoginData.objects.filter(emailID=emailID).exists():
-#            send mail
+            identInstance = ResetData.objects.get(emailID=emailID).ident
+            message = 'Username for your account is ' + identInstance.ident + '. Please be careful in the future.'
+            sendMail('Username',message,emailID)
             response_json['forgot'] = True
             response_json['forgotMessage'] = 'EMail Successful'
         else:
@@ -86,6 +99,9 @@ def forgot_Ident(request):
     return JsonResponse(response_json)
 
 
+def random_int(y):
+       return ''.join(string(random.randints(0,9) for x in range(y))
+
 @csrf_exempt
 def verify1(request):
     response_json = {}
@@ -93,9 +109,11 @@ def verify1(request):
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
-# gen otp
-# send otp
-# load stop time
+        OTP = int(random_int(7))
+        message = 'OTP for your account verification is ' + str(OTP)
+        sendMail('OTP For email Verification',message,emailID)
+        stop = datetime.now() + timedelta(minutes = 15)
+        stop = stop.strftime("%d/%m/%Y %H:%M:%S")
         OTPData.objects.create(emailID=emailID,OTP=OTP,stop=stop)
         response_json['success'] = True
         response_json['message'] = 'Successful'
@@ -105,6 +123,14 @@ def verify1(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+
+def diff(t_a, t_b,val):
+    t_diff = relativedelta(t_b, t_a)
+    if(t_diff.hours>0 or t_diff.minutes > val):
+        return False
+    else:
+        return True
 
 @csrf_exempt
 def verify2(request):
@@ -116,8 +142,8 @@ def verify2(request):
         OTP = int(request.POST.get("OTP"))
             
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
-
-        if(OTPDataInstance.OTP == OTP ):#and ): # timenow less than stop time ):
+        stop = datetime.strptime(OTPDataInstance.stop, '%d/%m/%Y %H:%M:%S')
+        if(OTPDataInstance.OTP == OTP and diff(datetime.now,stop,15)):
             setattr(OTPDataInstance,'flag',True)
         response_json['success'] = True
         response_json['message'] = 'Successful'

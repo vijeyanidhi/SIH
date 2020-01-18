@@ -44,6 +44,7 @@ def AddReport(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
 @csrf_exempt
 def sendmail(request):
 

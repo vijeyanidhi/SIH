@@ -13,8 +13,8 @@ class LoginDataAdmin(admin.ModelAdmin):
 admin.site.register(LoginData, LoginDataAdmin)
 
 class ResetDataAdmin(admin.ModelAdmin):
-    list_display = ["ident","name","mobile","modified","created"]
-    search_fields = ["ident","name","mobile","modified","created"]
+    list_display = ["ident","name","emailID","mobile","modified","created"]
+    search_fields = ["ident","name","emailID","mobile","modified","created"]
 
 admin.site.register(ResetData, ResetDataAdmin)
 
