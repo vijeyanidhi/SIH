@@ -28,56 +28,56 @@
             <form id="customer-form">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="inputEmail4">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="FirstName">
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputPassword4">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName">
+                    <label>Mobile</label>
+                    <input type="text" class="form-control" id="mobileno" name="mobileno" placeholder="Mobile No">
                   </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">Password</label>
-                      <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+                      <label>Password</label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="inputPassword4">Repeat Password</label>
-                      <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="repeatPassword">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="inputEmail4">House Number</label>
-                      <input type="text" class="form-control" id="houseNumber" name="houseNumber" placeholder="houseNumber">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="inputPassword4">Street Name</label>
-                      <input type="text" class="form-control" id="streetName" name="streetName" placeholder="streetName">
+                      <label>Repeat Password</label>
+                      <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Repeat Password">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">Area</label>
+                      <label>House Number</label>
+                      <input type="text" class="form-control" id="houseNumber" name="houseNumber" placeholder="House Number">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Street Name</label>
+                      <input type="text" class="form-control" id="streetName" name="streetName" placeholder="Street Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Area</label>
                       <input type="text" class="form-control" id="area" name="area" placeholder="Area">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="inputPassword4">City</label>
+                      <label>City</label>
                       <input type="text" class="form-control" id="city" name="city" placeholder="City">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">State</label>
+                      <label>State</label>
                       <input type="text" class="form-control" id="state" name="state" placeholder="State">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="inputPassword4">Country</label>
+                      <label>Country</label>
                       <input type="text" class="form-control" id="country" name="country" placeholder="Country">
                     </div>
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary" name="details">Sign in</button>
                 </div>
               </form>
 
@@ -87,7 +87,33 @@
            event.preventDefault();
            if(event.target.password.value === event.target.repeatPassword.value) {
                 // submit the form
-           } else {
+                {
+                  $.ajax({
+                      url: "http://localhost:8000/signup/",
+                      type: "POST",
+                      data: {
+                        password: event.target.password.value,
+                        accessLevel: "doctor",
+                        name: event.target.name.value,
+                        emailID: sessionStorage.getItem('emailID'),
+                        mobile: event.target.mobileno.value,
+                        houseNumber: event.target.houseNumber.value,
+                        streetName: event.target.streetName.value,
+                        area: event.target.area.value,
+                        city: event.target.city.value,
+                        state: event.target.state.value,
+                        country: event.target.country.value,
+                      },
+                      success: function(response){
+                        if(response.success){
+                          sessionStorage.setItem('ident', response.ident);
+                          window.location.href = 'http://localhost:8000/custprofile/';
+                        }
+                      }
+                  })
+                }
+              }
+            else {
                 alert('password does not match');
            }
        }
