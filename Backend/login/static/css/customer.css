@@ -1,0 +1,66 @@
+body{
+	text-align:center;
+}
+h1{
+	font-size: 2.8em;
+	font-weight: 900;
+}
+p{
+	font-size: 1.2em;
+}
+
+.section2{
+	background-color: white;
+	width: 70%;
+	margin: auto;
+	padding-top: 20px;
+}
+
+.section2 .down{
+    margin-block-end: 0px;
+}
+.section2 .up{
+    margin-block-start: 0px;
+}
+
+.section2 p.bold{
+    font-weight: bold;
+}
+.section2 .content{
+	width: 80%;
+	margin: 6rem auto;
+}
+
+/*section 3*/
+.section3{
+	background-color: #240C48;
+	padding:2rem 5rem;
+}
+.section3 .block{
+background-color: #FEB83F;
+margin: 3rem;
+text-align: center;
+border-radius: 10px;
+
+}
+.section3 img{
+	height: 300px;
+}
+/*section 3 ends*/
+.section4 .content{
+    width: 70%;
+	margin: auto;
+  
+}
+post card
+.padding{
+	padding-bottom: 2rem;
+}
+h4.card-title{
+	font-weight: bold;
+	font-size: :3rem;
+
+}
+.foot-sec{
+	text-align: left;
+}

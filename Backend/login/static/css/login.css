@@ -1,0 +1,19 @@
+.container-azad {
+	width: 60%;
+	margin: 2rem auto;
+	border-radius: 20px;
+	background-color: white;
+	padding:2rem 0 ; 
+}
+.container-fluid{
+	min-height: 100vh;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FEB83F;
+}
+a.cross{
+	float:right;
+	padding-right: 1rem;
+
+}

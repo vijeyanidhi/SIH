@@ -1,0 +1,25 @@
+.row {
+	margin: 0;
+}
+
+.col-xs-6 {
+	padding: 0;
+}
+img.corners{
+width: 100%;
+}
+.content{
+	margin-top:10rem;
+}
+.content.left{
+	padding-left:6rem; 
+}
+.section2 ul{
+	font-size: 2em;
+}
+.section2 h3{
+	font-weight: 700;
+}
+.wrapper {
+	min-height: calc(100vh - 350px);
+}

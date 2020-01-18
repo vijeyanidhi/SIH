@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>sign in</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./../static/css/main.css">
+    <style>
+        .main {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+        }
+        body{
+            background-color: #6232a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="main" style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">        
+            <form id="customer-form">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Mobile</label>
+                    <input type="text" class="form-control" id="mobileno" name="mobileno" placeholder="Mobile No">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Password</label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Repeat Password</label>
+                      <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Repeat Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>House Number</label>
+                      <input type="text" class="form-control" id="houseNumber" name="houseNumber" placeholder="House Number">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Street Name</label>
+                      <input type="text" class="form-control" id="streetName" name="streetName" placeholder="Street Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Area</label>
+                      <input type="text" class="form-control" id="area" name="area" placeholder="Area">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>City</label>
+                      <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>State</label>
+                      <input type="text" class="form-control" id="state" name="state" placeholder="State">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Country</label>
+                      <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary" name="details">Sign in</button>
+                </div>
+              </form>
+
+   </div>
+   <script>
+       document.getElementById('customer-form').onsubmit = function(event) {
+           event.preventDefault();
+           if(event.target.password.value === event.target.repeatPassword.value) {
+                // submit the form
+                {
+                  $.ajax({
+                      url: "http://localhost:8000/signup/",
+                      type: "POST",
+                      data: {
+                        password: event.target.password.value,
+                        accessLevel: "checker",
+                        name: event.target.name.value,
+                        emailID: sessionStorage.getItem('emailID'),
+                        mobile: event.target.mobileno.value,
+                        houseNumber: event.target.houseNumber.value,
+                        streetName: event.target.streetName.value,
+                        area: event.target.area.value,
+                        city: event.target.city.value,
+                        state: event.target.state.value,
+                        country: event.target.country.value,
+                      },
+                      success: function(response){
+                        if(response.success){
+                          sessionStorage.setItem('ident', response.ident);
+                          window.location.href = 'http://localhost:8000/custprofile/';
+                        }
+                      }
+                  })
+                }
+                }
+            else {
+                alert('password does not match');
+           }
+       }
+   </script>
+</body>
+</html>

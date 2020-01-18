@@ -1,0 +1,60 @@
+.hidden_style {
+  display: none;
+}
+
+.container-azad {
+	width: 60%;
+	margin: 2rem auto;
+	border-radius: 20px;
+	background-color: white;
+	padding:2rem 0 ; 
+}
+.container-fluid{
+	min-height: 100vh;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #FEB83F;
+}
+a.cross{
+	float:right;
+	padding-right: 1rem;
+
+}
+
+/*socila links*/
+.social a{
+	font-size: 2rem;
+	padding: 1rem;
+}
+.fa-facebook{
+	color: #3b5998;
+}
+.fa-twitter{
+	color: #00aced;
+}
+.fa-google{
+	color: #dd4b39;
+}
+
+.fa-facebook:hover, 
+.fa-twitter:hover, 
+.fa-google:hover{
+	color: #d5d5d5;
+}
+.clearfix {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+#user-info {
+  border: none;
+  clear: both;
+  margin: 0 auto 20px;
+  max-width: 400px;
+  padding: 10px;
+  text-align: left;
+}

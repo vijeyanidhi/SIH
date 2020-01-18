@@ -21,6 +21,39 @@ def random_char(y):
 def ranint(y):
        return ''.join(str(random.randint(0,9)) for x in range(y))
 
+def diff(t_a, t_b,val):
+    t_diff = relativedelta(t_b, t_a)
+    if(t_diff.hours>0 or t_diff.minutes > val):
+        return False
+    else:
+        return True
+
+def mainPage(request):
+    return render(request, 'main.html')
+
+def renderSignIn(request):
+    return render(request, 'signup.html')
+
+def renderOption(request):
+    return render(request, 'option.html')
+
+def renderInpCustomer(request):
+    return render(request, 'inpcustomer.html')
+
+def renderInpDoctor(request):
+    return render(request, 'inpdoctor.html')
+
+def renderInpChecker(request):
+    return render(request, 'inpchecker.html')
+
+def custprofile(request):
+    return render(request, 'custprofile.html')
+
+def docprofile(request):
+    return render(request, 'docprofile.html')
+
+def checkerprofile(request):
+    return render(request, 'checkerprofile.html')
 
 @csrf_exempt
 def login(request):
@@ -101,18 +134,26 @@ def forgot_Ident(request):
     return JsonResponse(response_json)
 
 @csrf_exempt
-def verify1(request):
+def verifymail(request):
     response_json = {}
     if request.method == 'POST':
+        print(request.POST)
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         emailID = str(request.POST.get("emailID"))
-        OTP = 124# 
+        OTP = int(ranint(7))
         message = 'OTP for your account verification is ' + str(OTP)
         sendMail('OTP For email Verification',message,emailID)
         stop = datetime.now() + timedelta(minutes = 15)
-        stop = stop.strftime("%d/%m/%Y %H:%M:%S")
-        OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
+        stop = str(stop.strftime("%d/%m/%Y %H:%M:%S"))
+        if OTPData.objects.filter(emailID = emailID).exists():
+            row=OTPData.objects.get(emailID = emailID)
+            setattr(row,'otp',OTP)
+            setattr(row,'flag',False)
+            setattr(row,'stop',stop)
+            row.save()
+        else:
+            OTPData.objects.create(emailID=emailID,otp=OTP,stop=stop)
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -122,16 +163,8 @@ def verify1(request):
     print (str(response_json))
     return JsonResponse(response_json)
 
-
-def diff(t_a, t_b,val):
-    t_diff = relativedelta(t_b, t_a)
-    if(t_diff.hours>0 or t_diff.minutes > val):
-        return False
-    else:
-        return True
-
 @csrf_exempt
-def verify2(request):
+def verifyotp(request):
     response_json = {}
     if request.method == 'POST':
         for x, y in request.POST.items():
@@ -139,9 +172,15 @@ def verify2(request):
         emailID = str(request.POST.get("emailID"))
         OTP = int(request.POST.get("OTP"))
         OTPDataInstance = OTPData.objects.get(emailID=emailID)
-        stop = datetime.strptime(OTPDataInstance.stop, '%d/%m/%Y %H:%M:%S')
-        if(OTPDataInstance.otp == OTP and diff(datetime.now,stop,15)):
+        stop = datetime.strptime(OTPDataInstance.stop, "%d/%m/%Y %H:%M:%S")
+        if(OTPDataInstance.otp == OTP and diff(datetime.now(),stop,15)):
             setattr(OTPDataInstance,'flag',True)
+            OTPDataInstance.save()
+            response_json['otp'] = True
+            response_json['otpmsg'] = 'successful'
+        else:
+            response_json['otp'] = False
+            response_json['otpmsg'] = 'not successful'
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -150,11 +189,3 @@ def verify2(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
-
-def renderSignIn(request):
-    return render(request, 'signup.html')
-
-@csrf_exempt
-def sendmail(request):
-    message = 'OTP for your account verification is '
-    sendMail('OTP For email Verification',message,"vijay")
