@@ -64,6 +64,9 @@ def signin(request):
 def doctor(request):
     return render(request, 'doctor.html')
 
+def detail(request):
+    return render(request, 'detail.html')
+
 @csrf_exempt
 def login(request):
     response_json = {}

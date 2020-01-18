@@ -9,6 +9,7 @@ from .models import *
 
 from django.core.mail import send_mail
 
+import os
 # Create your views here.
 
 @csrf_exempt
@@ -105,7 +106,7 @@ def handle_uploaded_file(file, filename):
 
 @csrf_exempt
 def upload(request):
-    reponse_json = {}
+    response_json = {}
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)

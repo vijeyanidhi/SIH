@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <!-- nav bar  -->
   <nav class="navbar navbar-invert navbar-fixed-top">
     <div class="container-fluid">
@@ -50,7 +51,10 @@
     <!-- <img src="image/about/about main pic.jpg" class="img-fluid" /> -->
     <div style="margin: 5rem;">
         <img id="image-output" src="" alt="upload-image" />
+        <form id="imageForm">
         <input id="image-input" type="file" name="image" />
+        <button type="submit" name="upload">Upload</button>
+      </form>
       </div>
         
   </div>
@@ -63,9 +67,46 @@
       var y = event.pageY - this.offsetTop;
       console.log(x, y);
     }
+
+    // var coords = [];
+    // function onImageClick(event) {
+    //   coords.push({
+    //     x: event.pageX - this.offsetLeft,
+    //     y: event.pageY - this.offsetTop
+    //   });
+    //   console.log(coords);
+    // }
+
+
+
+    document.getElementById('imageForm').onsubmit = function(event) {
+      event.preventDefault();
+    var files = event.target.image.files;
+    var formData = new FormData();
+    formData.append('file', files[0]);
+
+    $.ajax({
+      url: '/upload/',
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+        console.log(response);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  }
+
+
+    
+
+
+
     document.getElementById('image-input').onchange = onImageChange;
     document.getElementById('image-output').ondblclick = onImageClick;
   </script>
+
 
 </body>
 

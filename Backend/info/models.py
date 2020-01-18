@@ -45,7 +45,7 @@ class CheckerData(models.Model):
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
-class customerDoctor(modes.Model):
+class customerDoctor(models.Model):
     ident = models.ForeignKey(LoginData, null=True)
     Doctor = models.ForeignKey(DoctorData, null=True)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
