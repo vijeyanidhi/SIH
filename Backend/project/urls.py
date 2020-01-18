@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login1/', login),
     url(r'^login/',renderSignIn),
-    url(r'^verify1/',verify1),
-    url(r'^verify2/',verify2),
+    url(r'^verifymail/',verifymail),
+    url(r'^verifyotp/',verifyotp),
+    url(r'^option/',renderOption),
+
     url(r'^mail/',sendmail)
+
 ]
