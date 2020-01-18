@@ -9,82 +9,68 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./../static/css/main.css">
-  <link rel="stylesheet" type="text/css" href="./../static/css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/sign-in.css">
+    <style>
+        .main {
+        margin: auto;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+        }
+        body{
+            background-color: #6232a8;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="container-fluid">
-    <div class="container-azad">
-      <div class="row">
-        <div class="col-xs-4">
+    <ul id="reportList" class="list-group">
+      </ul>
+      <div id="reportData">
 
-        </div>
-        <div class="col-xs-4">
-          <form id="emailForm">
-            <h4>Sign Up</h4>
-            <div class="form-group">
-              <label for="name">Email address</label>
-              <input type="email" class="form-control" id="emailID" name="emailID" placeholder="Enter email"><br>
-              <button type="submit" class="btn btn-default" name="sendOTP">Send OTP</button>
-            </div>
-          </form>
-          <form id="otpForm">
-            <div class="form-group">
-              <label for="Password">OTP</label>
-              <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP">
-            </div>
-            <!-- <a href="./features.html"><button class="btn btn-primary btn-lg">FEATURES</button></a> -->
-            <button class="btn btn-default" name="verify">Verify</button>
-          </form>
-        </div>
-        <div class="col-xs-4">
-          <a class="cross" href="./index.html"> <img src="./image/contact-us/cross.png"></a>
-        </div>
       </div>
-    </div>
-  </div>
+      
+   <script>
+       function getCustInfo() {
+                  $.ajax({
+                      url: "http://localhost:8000/getrep/",
+                      type: "POST",
+                      data: {
 
-  <script>
-      document.getElementById('emailForm').onsubmit = function(event) {
-        event.preventDefault();
-        var emailID = event.target.emailID.value;
-        $.ajax({
-          url: "http://localhost:8000/verifymail/",
-          type: "POST",
-          data: {
-            emailID: emailID,
-          },
-          success: function(response) {
-            alert(response.message);
-          }
-        })
-      }
-      document.getElementById('otpForm').onsubmit = function(event) {
-        event.preventDefault();
-        console.log(document.getElementById('emailID'));
-        var emailID = document.getElementById('emailID').value;
-        var OTP = event.target.otp.value;
-        $.ajax({
-          url: "http://localhost:8000/verifyotp/",
-          type: "POST",
-          data: {
-            emailID: emailID,
-            OTP: OTP
-          },
-          success: function(response) {
-            if(response.otp) {
-              sessionStorage.setItem('emailID', emailID);
-              window.location.href = 'http://localhost:8000/option/';
-            }
-            else
-            {
-              alert(response.otpmsg);
-            }
-          }
-        })
-      }
-  </script>
+                            // ident: sessionStorage.getItem("ident")
+                      },
+                      success: function(response){
+                        var data = response.data_list;
+                        data.forEach(function(el) {
+                            var node = document.createElement('li');
+                            node.setAttribute('class', 'list-group-item');
+                            node.onclick = function() {
+                                    $.ajax({
+                                        url: 'http://localhost:8000/getReportTotal/',
+                                        type: 'POST',
+                                        data: {
+                                            reportID: el.reportID
+                                        },
+                                        success: function(response) {
+                                            console.log(response);
+                                        }
+                                    })
+                                }
+                            var textnode = document.createTextNode(el.reportID);
+                            node.appendChild(textnode);
+                            document.getElementById('reportList').appendChild(node);
+
+                        });
+                      }
+                  })
+                }
+                getCustInfo();
+
+
+
+
+
+   </script>
+
 </body>
-
 </html>

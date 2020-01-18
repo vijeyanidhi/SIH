@@ -223,20 +223,20 @@ def sendTotalReport(request):
         reportInstance = ReportString.objects.filter(reportID=reportID)
 
         for x in ReportList.objects.filter(reportID=reportInstance):
-            dl1.append(x.key)
-            dl2.append(x.value)
+            dl1.append(x.reportKey)
+            dl2.append(x.reportValue)
 
         for x in ReportBasic.objects.filter(reportID=reportInstance):
-            dl3.append(x.key)
-            dl4.append(x.value)
+            dl3.append(x.reportKey)
+            dl4.append(x.reportValue)
 
         for x in ReportValues.objects.filter(reportID=reportInstance):
-            dl5.append(x.type)
-            dl6.append(x.key)
-            dl7.append(x.value)
-
-        response_json['comment'] = reportInstance.comment
-        response_json['summary'] = reportInstance.summary
+            dl5.append(x.reporttype)
+            dl6.append(x.reportKey)
+            dl7.append(x.reportValue)
+        print(reportID)
+        response_json['comment'] = ReportString.objects.get(reportID=reportID).comments
+        response_json['summary'] = ReportString.objects.get(reportID=reportID).summary
 
         response_json['listkey'] = dl1
         response_json['listvalue'] = dl2
