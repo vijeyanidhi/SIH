@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 
+from django.core.mail import send_mail
+
 # Create your views here.
 
 @csrf_exempt
@@ -42,4 +44,13 @@ def AddReport(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+@csrf_exempt
+def sendmail(request):
 
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        'vijeyanidhi@gmail.com',
+        ['vijeyanidhi@gmail.com'],
+        fail_silently=False,
+    )

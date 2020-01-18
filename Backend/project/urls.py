@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from login.views import *
+from report.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login1/', login),
     url(r'^login/',renderSignIn),
-    url(r'^verify1/',verify1)
+    url(r'^verify1/',verify1),
+    url(r'^mail/',sendmail)
 ]
