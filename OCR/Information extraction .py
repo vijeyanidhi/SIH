@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[16]:
-
-
 import cv2 
 import pytesseract
 import numpy as np
@@ -11,10 +5,6 @@ import re
 import pandas as pd
 from gensim.summarization.summarizer import summarize
 import os
-
-
-# In[76]:
-
 
 # get grayscale image
 def get_grayscale(image):
@@ -63,15 +53,11 @@ def match_template(image, template):
 
 #Image pre-processing before feeding it to OCR algorithm
 factor = 2
-img = cv2.imread('/home/amit/Downloads/Lab Reports/test4.png')
+img = cv2.imread('test4.png')
 img = cv2.resize(img, (factor*img.shape[1],factor*img.shape[0]), interpolation = cv2.INTER_CUBIC)
 img = get_grayscale(img)
 img = deskew(img)
 #img = thresholding(img)
-
-'''cv2.imshow('frame', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()'''
 
 #Text extraction by OCR (line by line)
 custom_config = r'--oem 3 --psm 6'
@@ -91,8 +77,6 @@ def Basic_details(text):
         name = match.group(3)
         dict_basic.append(['Name:', name])
         break
-
-
     for i in range(len(df_basic)):
         match = re.search(df_basic['Fields'][i]+'(\S+\s+)', text)
         if match:
@@ -154,10 +138,6 @@ def report_summary(text):
 
 Summary = report_summary(Comments_Report)
 
-
-# In[79]:
-
-
 #Problem, tests and treatment extraction from reports
 arg1 = 'raw_text.txt'
 
@@ -180,4 +160,3 @@ for i in range(len(data)):
 print(list_problem)
 print(list_treatment)
 print(list_tests)
-

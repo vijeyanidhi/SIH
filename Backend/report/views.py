@@ -93,3 +93,5 @@ def reportContent(request):
 
     print (str(response_json))
     return JsonResponse(response_json)
+
+
