@@ -59,23 +59,23 @@
         
   </div>
   <script>
-    function onImageChange(event) {
-      document.getElementById('image-output').src = URL.createObjectURL(event.target.files[0]);
-    }
-    function onImageClick(event) {
-      var x = event.pageX - this.offsetLeft;
-      var y = event.pageY - this.offsetTop;
-      console.log(x, y);
-    }
-
-    // var coords = [];
-    // function onImageClick(event) {
-    //   coords.push({
-    //     x: event.pageX - this.offsetLeft,
-    //     y: event.pageY - this.offsetTop
-    //   });
-    //   console.log(coords);
+    // function onImageChange(event) {
+    //   document.getElementById('image-output').src = URL.createObjectURL(event.target.files[0]);
     // }
+    // function onImageClick(event) {
+    //   var x = event.pageX - this.offsetLeft;
+    //   var y = event.pageY - this.offsetTop;
+    //   console.log(x, y);
+    // }
+
+    var coords = [];
+    function onImageClick(event) {
+      coords.push({
+        x: event.pageX - this.offsetLeft,
+        y: event.pageY - this.offsetTop
+      });
+      console.log(coords);
+    }
 
 
 
@@ -97,6 +97,7 @@
       processData: false
     });
   }
+  
 
 
     
