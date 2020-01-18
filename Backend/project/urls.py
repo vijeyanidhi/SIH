@@ -20,7 +20,9 @@ from report.views import *
 from info.views import *
 
 urlpatterns = [
+    
     url(r'^admin/', admin.site.urls),
+    url(r'', mainPage),
     url(r'^login1/', login),
     url(r'^login/',renderSignIn),
     url(r'^verifymail/',verifymail),

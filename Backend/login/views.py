@@ -28,6 +28,9 @@ def diff(t_a, t_b,val):
     else:
         return True
 
+def mainPage(request):
+    return render(request, 'main.html')
+
 def renderSignIn(request):
     return render(request, 'signup.html')
 
