@@ -40,11 +40,12 @@
       
    <script>
        function getCustInfo() {
+                var email = sessionStorage.getItem("emailID");
                   $.ajax({
                       url: "http://localhost:8000/getrep/",
                       type: "POST",
                       data: {
-
+                        email: email
                             // ident: sessionStorage.getItem("ident")
                       },
                       success: function(response){
