@@ -78,13 +78,13 @@ def process(ident,fp,values):
     ReportStringInstance = ReportString.objects.get(reportID=reportID)
     
     for x,y in dict_blood.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,report_type="blood report",reportKey=x,reportValue=y)
+        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="blood report",reportKey=x,reportValue=y)
     for x,y in dict_urine.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,report_type="urine report",reportKey=x,reportValue=y)
+        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="urine report",reportKey=x,reportValue=y)
     for x,y,z in dict_liver.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,report_type="liver report",reportKey=x,reportValue=y)
+        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="liver report",reportKey=x,reportValue=y)
     for x,y in dict_urine.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,report_type="stool report",reportKey=x,reportValue=y)
+        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="stool report",reportKey=x,reportValue=y)
 
     for x,y in dict_basic:
         ReportBasic.objects.create(reportID=ReportStringInstance,reportKey=x,reportValue=y)
