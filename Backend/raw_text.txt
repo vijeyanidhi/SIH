@@ -1,43 +1,34 @@
-Lee ea...
-: National Reference Lab: Sector-18, Bloc-E, Rohini, New Delhi - 110 065
-La ae abe Tel: O11 ~ 3040-3210, Fax 011 ~ 3040-320
-E-mal: laipathiabs@\alpathiabs.com Web: www.ialpathlabs.com_
-}
-Hone Lt Gendarme ae
-$35 - LPL-BAREILLY (ony) Brig. De. Arvind Lal Dr, Vandana Lal
-Suniks, DCP. M0 (PATH. CAP
-JAIHIND KOTHI, MACCANIAR ROAD, PREM Padoe Art Chief of Pathology
-NAGA R, BAREILLY-243005, U.P. ee een ee
-BAREILLY
-Name : Mr. TARUN SHARMA Collected : 15/3/2017 11:10:00AM
-Received : 15/3/2017 11:24:47AM
-LabNo. : 136063944 Age: 20 Years Gender: Male Reported : 1513/2017 12:34:34PM
-Alc Status =: P RefBy: SELF Report Status —_: Final
-Test Name Results Units Bio. Ref. Interval
-GLUCOSE, FASTING (F), PLASMA 82.00 mg/dL 70.00 - 100.00
-(GOD-POD)
-THYROID PROFILE, FREE, SERUM
-(ECLIA)
-T3, Free; FT3 3.17 pg/mL 2.00 - 4.40
-T4, Free; FT4 1.25 ng/dL 0.80 - 2.00
-TSH, Ultrasensitive 2.680 ulU/mL 0.700 - 6.400
-Note
-1. TSH levels are subject to circadian variation, reaching peak levels between 2 - 4.a.m. and at a
-minimum between 6-10 pm. The variation is of the order of 50%. hence time of the day has influence
-on the measured serum TSH concentrations.
-2. TSH Values <0.03 ulU/mL need to be clinically correlated due to presence of a rare TSH variant in
-some individuals
-Clinical Use
-e Primary Hypothyroidism
-e Hyperthyroidism
-« Hypothalamic - Pituitary hypothyroidism
-« Inappropriate TSH secretion
-e Nonthyroidal illness
-e Autoimmune thyroid disease
-« Pregnancy associated thyroid disorders
-« Thyroid dysfunction in infancy and early childhood
-Or. Rahul Varshney
-MB8S.MD (Pathology)
-‘Chiet of Lab
-wate n ence nnnnnnnnnnnmemenenn ENG Of FOPOMT --aa--—--—nnnnnnn anne nnnn nn
-# Notin NABL scope ‘MOD 00 0A Page tof2
+Name: MR. RAHEE PUNYASHLOKA Collected:13/10/12 08:57
+
+Lab. No:12 2609835 Age:19 years Gender : M Received :13/10/12 08:59
+
+A/C Status:C Ref. By: UNKNOWN Printed :13/10/12 17:38
+
+Test Name Result Units Ref. Range
+
+COMPLETE BLOOD COUNT;CBC
+
+(Electrical Impedence & Flow)
+
+Haemoglobin 13.60 g/dL (13.00 - 17.00)
+Packed Cell Volume 40.70 % (40.00 - 50.00)
+Leukocyte Count, Total 8.45 thou/mm3 (4.00 - 10.00)
+RBC Count 4.88 mill/mm3 (4.50 - 5.50)
+MCV 83.40 fL (80.00 - 100.00)
+MCH 27.90 pg (27.00 - 32.00)
+MCHC 33.40 g/dL (32.00 - 35.00)
+RDW 14.20 % (11.50 - 14.50)
+Platelet Count 255.0 thou/mm3 (150.0 - 450.0)
+Differential % Leukocyte Counts:
+
+Segmented Neutrophils 74.30 % (40.00 - 80.00)
+Lymphocytes 12.50 % (20.00 - 40.00)
+Monocytes 13.10 % (2.00 - 10.00)
+Eosinophils 0.00 % (1.00 - 6.00)
+Basophils 0.10 % (< 2.00)
+“Differential Absolute Leukocyte Counts:
+
+Neutrophil 6.27 thou/mm3 (2.00 - 7.00)
+Lymphocyte 1.06 thou/mm3 (1.00 - 3.00)
+Monocyte 1.21 thou/mm3 (0.20 - 1.00)
+Eosinophil 0.00 thou/mm3 (0.02 - 0.50)

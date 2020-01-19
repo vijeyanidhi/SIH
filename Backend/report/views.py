@@ -45,7 +45,7 @@ def handle_uploaded_file(file, filename):
 
 @csrf_exempt
 def upload(request):
-    reponse_json = {}
+    response_json = {}
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
@@ -66,7 +66,7 @@ def upload(request):
     return JsonResponse(response_json)
 
 def process(ident,fp,values):
-    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
+    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_test = information_extract(fp)
     reportID = str(datetime.now().strftime("%d/%m/%Y-%H:%M"))
     if(len(Comments_Report)==0):
         Comments_Report="None"
@@ -76,18 +76,25 @@ def process(ident,fp,values):
     ReportString.objects.create(reportID=reportID,comments=Comments_Report,summary=Summary)
 
     ReportStringInstance = ReportString.objects.get(reportID=reportID)
-    
-    for x,y in dict_blood.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="blood report",reportKey=x,reportValue=y)
-    for x,y in dict_urine.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="urine report",reportKey=x,reportValue=y)
-    for x,y,z in dict_liver.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="liver report",reportKey=x,reportValue=y)
-    for x,y in dict_urine.items():
-        ReportValues.objects.create(reportID=ReportStringInstance,reporttype="stool report",reportKey=x,reportValue=y)
+    if dict_blood is not None:
+        for x,y in dict_blood.items():
+            ReportValues.objects.create(reportID=ReportStringInstance,reporttype="blood report",reportKey=x,reportValue=y)
 
-    for x,y in dict_basic:
-        ReportBasic.objects.create(reportID=ReportStringInstance,reportKey=x,reportValue=y)
+    if dict_urine is not None:
+        for x,y in dict_urine.items():
+            ReportValues.objects.create(reportID=ReportStringInstance,reporttype="urine report",reportKey=x,reportValue=y)
+    
+    if dict_liver is not None:
+        for x,y in dict_liver.items():
+            ReportValues.objects.create(reportID=ReportStringInstance,reporttype="liver report",reportKey=x,reportValue=y)
+    
+    if dict_stool is not None:
+        for x,y in dict_stool.items():
+            ReportValues.objects.create(reportID=ReportStringInstance,reporttype="stool report",reportKey=x,reportValue=y)
+
+    if dict_basic is not None:
+        for x,y in dict_basic.items():
+            ReportBasic.objects.create(reportID=ReportStringInstance,reportKey=x,reportValue=y)
 
     for x in list_problem:
         ReportList.objects.create(reportID=ReportStringInstance,reportKey="problem",reportValue=x)
