@@ -16,7 +16,7 @@ class LoginData(models.Model):
         return str(self.ident)
 
 class ResetData(models.Model):
-    ident = models.ForeignKey(LoginData, null=True)
+    ident = models.ForeignKey(LoginData, null=True,on_delete=models.PROTECT)
     name = models.CharField(max_length=240, blank=False,null=True)
     emailID = models.CharField(max_length=240, blank=False,null=True)
     mobile = models.CharField(max_length=120, blank=False, null=False)

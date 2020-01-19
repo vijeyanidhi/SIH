@@ -7,7 +7,7 @@ from login.models import *
 # Create your models here.
 
 class CustomerData(models.Model):
-    ident = models.ForeignKey(LoginData, null=True)
+    ident = models.ForeignKey(LoginData, null=True,on_delete=models.PROTECT)
     houseNumber = models.CharField(max_length=240, blank=False, null=True)
     streetName = models.CharField(max_length=240, blank=False, null=True)
     area = models.CharField(max_length=240, blank=False, null=True)
@@ -19,7 +19,7 @@ class CustomerData(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 class DoctorData(models.Model):
-    ident = models.ForeignKey(LoginData, null=True)
+    ident = models.ForeignKey(LoginData, null=True,on_delete=models.PROTECT)
     houseNumber = models.CharField(max_length=240, blank=False, null=True)
     streetName = models.CharField(max_length=240, blank=False, null=True)
     area = models.CharField(max_length=240, blank=False, null=True)
@@ -33,7 +33,7 @@ class DoctorData(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 class CheckerData(models.Model):
-    ident = models.ForeignKey(LoginData, null=True)
+    ident = models.ForeignKey(LoginData, null=True,on_delete=models.PROTECT)
     houseNumber = models.CharField(max_length=240, blank=False, null=True)
     streetName = models.CharField(max_length=240, blank=False, null=True)
     area = models.CharField(max_length=240, blank=False, null=True)
@@ -46,7 +46,7 @@ class CheckerData(models.Model):
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 class customerDoctor(models.Model):
-    ident = models.ForeignKey(LoginData, null=True)
-    Doctor = models.ForeignKey(DoctorData, null=True)
+    ident = models.ForeignKey(LoginData, null=True,on_delete=models.PROTECT)
+    Doctor = models.ForeignKey(DoctorData, null=True,on_delete=models.PROTECT)
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)

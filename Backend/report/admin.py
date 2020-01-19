@@ -13,8 +13,8 @@ class TermDataAdmin(admin.ModelAdmin):
 admin.site.register(TermData, TermDataAdmin)
 
 class ReportStringAdmin(admin.ModelAdmin):
-    list_display = ["ident","reportID","comments","summary","modified","created"]
-    search_fields = ["ident","reportID","comments","summary","modified","created"]
+    list_display = ["reportID","comments","summary","modified","created"]
+    search_fields = ["reportID","comments","summary","modified","created"]
 
 admin.site.register(ReportString, ReportStringAdmin)
 

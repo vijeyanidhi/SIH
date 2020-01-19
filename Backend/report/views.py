@@ -8,9 +8,12 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 
 from Mail import sendMail
+from datetime import datetime, timedelta 
 
 import os
 from PIL import Image
+
+from Information import information_extract
 # Create your views here.
 
 @csrf_exempt
@@ -48,10 +51,11 @@ def upload(request):
             print("key,value", x, ":", y)
         ident = str(request.POST.get("ident"))
         values = str(request.POST.get("values"))
-        fn = ident+str(datetime.now().strftime("%d/%m/%Y-%H:%M"))+'.jpg'
+        fn = ident+str(datetime.now().strftime("%d-%m-%Y-%H:%M"))+'.jpg'
         handle_uploaded_file(request.FILES['file'], fn)
-        path = "/upload/"+fn
-        process(ident,fp,values)
+        path = "/home/amit/SIH/Backend/upload/"+fn
+        print(path)
+        process(ident,path,values)
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -62,16 +66,14 @@ def upload(request):
     return JsonResponse(response_json)
 
 def process(ident,fp,values):
-#    im = Image.open(fp)
-#    im1 = im.crop((values))
-#    im1.save()
-#    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
+    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
     reportID = str(datetime.now().strftime("%d/%m/%Y-%H:%M"))
     if(len(Comments_Report)==0):
         Comments_Report="None"
     if(len(Summary)==0):
         Summary="None"
-    ReportString.objects.create(ident=LoginData.objects.get(ident=ident),reportID=reportID,comments=Comments_Report,summary=Summary)
+    
+    ReportString.objects.create(reportID=reportID,comments=Comments_Report,summary=Summary)
 
     ReportStringInstance = ReportString.objects.get(reportID=reportID)
     
@@ -101,11 +103,14 @@ def sendReportID(request):
     if request.method == 'POST':
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
-        emailID = str(request.POST.get("email"))
-        ResetDataInstance = ResetData.objects.get(emailID=emailID)
-        LoginDataInstance = ResetDataInstance.ident
-        for x in ReportString.objects.filter(ident=LoginDataInstance).distinct():
+#        emailID = str(request.POST.get("email"))
+#        ResetDataInstance = ResetData.objects.get(emailID=emailID)
+#        LoginDataInstance = ResetDataInstance.ident
+#        for x in ReportString.objects.filter(ident=LoginDataInstance).distinct():
+#            ret_list.append(x)
+        for x in ReportString.objects.all().values("reportID").distinct():
             ret_list.append(x)
+
         response_json['data_list'] = ret_list
         response_json['success'] = True
         response_json['message'] = 'Successful'
@@ -252,9 +257,6 @@ def sendTotalReport(request):
             dl2[x.reportKey]=x.reportValue
 
         for x in ReportValues.objects.filter(reportID=reportInstance):
-            dl5.append(x.reporttype)
-            dl6.append(x.reportKey)
-            dl7.append(x.reportValue)
             if(x.reporttype == "blood report"):
                 blood[x.reportKey] = x.reportValue
             elif(x.reporttype == "urine report"):
@@ -264,18 +266,18 @@ def sendTotalReport(request):
             elif(x.reporttype == "stool report"):
                 stool[x.reportKey] = x.reportValue  
 
+        dl3['blood']=blood
+        dl3['urine']=urine
+        dl3['liver']=liver
+        dl3['stool']=stool
+
         response_json['comment'] = ReportString.objects.get(reportID=reportID).comments
         response_json['summary'] = ReportString.objects.get(reportID=reportID).summary
 
         response_json['list'] = dl1
 
-        response_json['basickey'] = dl3
-        response_json['basicvalue'] = dl4
-
-        response_json['reptype'] = dl5
-        response_json['repkey'] = dl6
-        response_json['repvalue'] = dl7
-
+        response_json['basic'] = dl2
+        response_json['report_value'] = dl3
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
