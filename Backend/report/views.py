@@ -47,7 +47,11 @@ def upload(request):
         for x, y in request.POST.items():
             print("key,value", x, ":", y)
         ident = str(request.POST.get("ident"))
-        handle_uploaded_file(request.FILES['file'], str(request.FILES['file']))
+        values = str(request.POST.get("values"))
+        fn = ident+str(datetime.now().strftime("%d/%m/%Y-%H:%M"))+'.jpg'
+        handle_uploaded_file(request.FILES['file'], fn)
+        path = "/upload/"+fn
+        process(ident,fp,values)
         response_json['success'] = True
         response_json['message'] = 'Successful'
     else:
@@ -58,10 +62,10 @@ def upload(request):
     return JsonResponse(response_json)
 
 def process(ident,fp,values):
-    im = Image.open(fp)
-    im1 = im.crop((values))
-    im1.save()
-    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
+#    im = Image.open(fp)
+#    im1 = im.crop((values))
+#    im1.save()
+#    dict_basic, dict_blood, dict_urine, dict_liver, dict_stool, Comments_Report, Summary, list_problem, list_treatment, list_tests = information_extract(fp)
     reportID = str(datetime.now().strftime("%d/%m/%Y-%H:%M"))
     if(len(Comments_Report)==0):
         Comments_Report="None"
